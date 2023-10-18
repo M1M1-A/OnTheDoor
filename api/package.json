@@ -1,12 +1,12 @@
 {
-  "name": "acebook",
+  "name": "onTheDoor",
   "version": "0.0.0",
-  "description": "Template for the AceBook project",
+  "description": "Template for the onTheDoor project",
   "license": "CC BY-NC-SA",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "start:test": "MONGODB_URL='mongodb://0.0.0.0/acebook_test' npm start",
+    "start:test": "MONGODB_URL='mongodb://0.0.0.0/onTheDoor_test' npm start",
     "test": "jest"
   },
   "engines": {
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-session": "^1.17.2",
