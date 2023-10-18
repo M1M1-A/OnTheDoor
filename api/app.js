@@ -3,12 +3,14 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const JWT = require("jsonwebtoken");
-
+const cors = require('cors');
 const postsRouter = require("./routes/posts");
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 
 const app = express();
+
+app.use(cors());
 
 // setup for receiving JSON
 app.use(express.json())
@@ -57,5 +59,6 @@ app.use((err, req, res) => {
   // respond with details of the error
   res.status(err.status || 500).json({message: 'server error'})
 });
+
 
 module.exports = app;
