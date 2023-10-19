@@ -1,9 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
 import SignUp from './Screens/SignUp'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LogIn from './Screens/LogIn';
+import NewEvent from './Screens/NewEvent';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +22,15 @@ export default function App() {
             name='LogIn' 
             component={LogIn}
             options={{
-              // headerShown: false, 
+              headerShown: false, 
+              animationEnabled: false, 
+            }}
+          />
+          <Stack.Screen 
+            name='NewEvent' 
+            component={NewEvent}
+            options={{
+              headerShown: true, 
               animationEnabled: false, 
             }}
           />
@@ -33,11 +40,4 @@ export default function App() {
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: 'mediumspringgreen',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+
