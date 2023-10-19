@@ -14,7 +14,6 @@ const AuthenticationController = {
         res.status(401).json({ message: "user not found" });
       } else {
         bcrypt.compare(password, user.password, (result) => {
-          console.log(result)
           if (result) {
             const token = TokenGenerator.jsonwebtoken(user._id);
             res.status(201).json({ token: token, message: "OK", userId: user._id });
