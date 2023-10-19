@@ -1,5 +1,6 @@
 const User = require("../models/user");
-const TokenGenerator = require("../lib/token_generator")
+const TokenGenerator = require("../lib/token_generator");
+const bcrypt = require('bcrypt');
 
 const AuthenticationController = {
 
@@ -9,15 +10,23 @@ const AuthenticationController = {
 
     User.findOne({ email: email }).then((user) => {
       if (!user) {
-        console.log("auth error: user not found")
-        res.status(401).json({ message: "auth error" });
-      } else if (user.password !== password) {
-        console.log("auth error: passwords do not match")
-        res.status(401).json({ message: "auth error" });
+        console.log("auth error: user not found");
+        res.status(401).json({ message: "user not found" });
       } else {
-        const token = TokenGenerator.jsonwebtoken(user.id)
-        res.status(201).json({ token: token, message: "OK" });
+        bcrypt.compare(password, user.password, (result) => {
+          console.log(result)
+          if (result) {
+            const token = TokenGenerator.jsonwebtoken(user._id);
+            res.status(201).json({ token: token, message: "OK", userId: user._id });
+          } else {
+            console.log("auth error: passwords do not match");
+            res.status(400).json({ message: "incorrect password" });
+          }
+        });
       }
+    }).catch((err) => {
+      console.log("auth error: ", err);
+      res.status(500).json({ message: "Internal Server Error" });
     });
   }
 };

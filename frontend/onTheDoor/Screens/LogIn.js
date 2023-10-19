@@ -7,6 +7,7 @@ import styles from '../Styles/SignUpStyles';
 const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('')
   const navigation = useNavigation(); 
 
   const handleEmailInput = (text) => {
@@ -29,7 +30,10 @@ const LogIn = () => {
     });
     if (response.status !== 201) {
       console.log("Log in unsuccessful");
-      navigate("/login");
+      let data = await response.json();
+      // console.log("Error message:", data.message);
+      setError(data.message)
+      //useState to setError message. Then use this to show error on page
     } else {
       console.log("Log in successful");
       let data = await response.json();
@@ -56,6 +60,9 @@ const LogIn = () => {
         placeholder="Password" 
         onChangeText={handlePasswordInput}  
         />
+      {error && (
+        (<><Text>{error}</Text></>)
+      )}
       <TouchableOpacity 
         style={styles.button} 
         accessibilityLabel="Submit button"
