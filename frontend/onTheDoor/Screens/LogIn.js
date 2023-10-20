@@ -31,9 +31,7 @@ const LogIn = () => {
     if (response.status !== 201) {
       console.log("Log in unsuccessful");
       let data = await response.json();
-      // console.log("Error message:", data.message);
       setError(data.message)
-      //useState to setError message. Then use this to show error on page
     } else {
       console.log("Log in successful");
       let data = await response.json();
@@ -58,7 +56,8 @@ const LogIn = () => {
       <TextInput 
         style={styles.inputFields} 
         placeholder="Password" 
-        onChangeText={handlePasswordInput}  
+        onChangeText={handlePasswordInput}
+        secureTextEntry={true}  
         />
       {error && (
         (<><Text>{error}</Text></>)
