@@ -3,12 +3,14 @@ import { Text, SafeAreaView, TextInput, Pressable, View } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import styles from '../Styles/NewEventStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation} from '@react-navigation/native'; 
 const FormData = require('form-data');
 
 const NewEvent = () => {  
   const [file, setFile] = useState(null);
   const [eventName, setEventName] = useState("")
   const [userId, setUserId] = useState(null);
+  const navigation = useNavigation(); 
 
   useEffect(() => {
     const getUserId = async () => {
@@ -65,6 +67,7 @@ const NewEvent = () => {
   
         if (response.ok) {
           console.log('Upload successful');
+          navigation.navigate('Guestlist', {eventName: eventName})
         } else {
           console.log('Upload failed');
           console.log("Response", response.status)

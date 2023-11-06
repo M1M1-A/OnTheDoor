@@ -47,11 +47,7 @@ const tokenChecker = (req, res, next) => {
 app.use("/tokens", authenticationRouter);
 app.use("/users", usersRouter);
 app.use("/new-event", eventsRouter);
-
-// app.post('/new-event', upload.single("file"), (req, res) => {
-//   const file = req.file
-//   console.log("INDEX FILE", file)
-// })
+app.use("/get-event", eventsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

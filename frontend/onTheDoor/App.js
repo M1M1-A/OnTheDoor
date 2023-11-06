@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LogIn from './Screens/LogIn';
 import NewEvent from './Screens/NewEvent';
+import Guestlist from './Screens/Guestlist';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,14 @@ export default function App() {
           <Stack.Screen 
             name='NewEvent' 
             component={NewEvent}
+            options={{
+              headerShown: true, 
+              animationEnabled: false, 
+            }}
+          />
+          <Stack.Screen 
+            name='Guestlist' 
+            component={Guestlist}
             options={{
               headerShown: true, 
               animationEnabled: false, 
