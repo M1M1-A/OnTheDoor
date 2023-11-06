@@ -13,14 +13,14 @@ const AuthenticationController = {
         console.log("auth error: user not found");
         res.status(401).json({ message: "user not found" });
       } else {
-        bcrypt.compare(password, user.password, (result) => {
-          if (result) {
-            const token = TokenGenerator.jsonwebtoken(user._id);
-            res.status(201).json({ token: token, message: "OK", userId: user._id });
-          } else {
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (err) {
             console.log("auth error: passwords do not match");
             res.status(400).json({ message: "incorrect password" });
-          }
+          } else if (result) {
+            const token = TokenGenerator.jsonwebtoken(user._id);
+            res.status(201).json({ token: token, message: "OK", userId: user._id });
+          } 
         });
       }
     }).catch((err) => {

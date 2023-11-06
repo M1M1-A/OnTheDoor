@@ -56,21 +56,14 @@ In a new terminal session...
 
 ```
 ; cd frontend
-; npm start
+; npx expo start
 ```
-
-You should now be able to open your browser and go to `http://localhost:3000/signup` to create a new user.
-
-Then, after signing up, you should be able to log in by going to `http://localhost:3000/login`.
-
-After logging in, you won't see much but you can create posts using PostMan and they should then show up in the browser if you refresh the page.
 
 ### How to run automated tests
 
 The automated tests run by sending actual HTTP requests to the API. Therefore, before anything, you'll need to start the backend server in test mode (so that it connects to the test DB).
 
 ```bash
-# Make sure you're in the api directory
 ; cd api
 
 ; JWT_SECRET={secret} npm run start:test
@@ -85,7 +78,6 @@ Then, you can either run tests for the backend or the frontend following the ste
 Run the tests in a new terminal session:
 
 ```bash
-# Make sure you're in the api directory
 ; cd api
 
 ; JWT_SECRET={secret} npm run test
@@ -96,7 +88,6 @@ Run the tests in a new terminal session:
 Start the front end in a new terminal session
 
 ```bash
-# Make sure you're in the frontend directory
 ; cd frontend
 
 ; JWT_SECRET={secret} npm start
@@ -105,7 +96,6 @@ Start the front end in a new terminal session
 Then run the tests in a new terminal session
 
 ```bash
-# Make sure you're in the frontend directory
 ; cd frontend
 
 ; JWT_SECRET={secret} npm run test
