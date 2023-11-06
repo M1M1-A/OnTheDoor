@@ -11,7 +11,7 @@ export default function App() {
     <>
       <NavigationContainer>   
         <Stack.Navigator initialRouteName='SignUp'>
-          {/* <Stack.Screen 
+          <Stack.Screen 
             name='SignUp' 
             component={SignUp}
             options={{
@@ -25,7 +25,7 @@ export default function App() {
               headerShown: false, 
               animationEnabled: false, 
             }}
-          /> */}
+          />
           <Stack.Screen 
             name='NewEvent' 
             component={NewEvent}
