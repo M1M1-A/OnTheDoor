@@ -6,17 +6,22 @@ const GuestController = {
 
   UpdateGuestArrival: async (req, res) => {
     try {
-      const { guestId } = ObjectId(req.body.guestId);
+      const { guestId } = req.body;
+      const eventId = ObjectId(req.body.eventId)
 
-      const guest = await Events.findOneAndUpdate(
-        { "guests._id": guestId },
-        { $set: { "guests.$.arrived": true } }
-      );
+      const event = await Events.findById(eventId);
 
-      if (guest) {
-        res.status(200).json({ message: "Guest Checked In" });
+      if (event) {
+        const guest = event.guests.find((guest) => guest._id.toString() === guestId);
+        if (guest) {
+          guest.arrived = true;
+          await event.save();
+          res.status(200).json({ message: "Guest Checked In" });
+        } else {
+          res.status(404).json({ message: "Guest not found" });
+        }
       } else {
-        res.status(404).json({ message: "Guest not found" });
+        res.status(404).json({ message: "Event not found" });
       }
     } catch (error) {
       console.log("Error updating guest details", error);

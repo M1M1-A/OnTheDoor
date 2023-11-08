@@ -74,7 +74,7 @@ const Guestlist = () => {
   };
 
   const handlePress = (guest) => {
-    navigation.navigate("CheckIn", { guest });
+    navigation.navigate("CheckIn", { guest: guest, eventId: event._id });
   };
 
   return (
