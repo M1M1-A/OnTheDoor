@@ -20,13 +20,14 @@ const EventsController = {
         .on('end', async () => {
           const attendees = [];
           results.forEach((row) => {
-            const { 'First Name': firstName, 'Last Name': lastName, 'Email': email, 'Ticket Price': ticketPrice } = row;
+            const { 'First Name': firstName, 'Last Name': lastName, 'Email': email, 'Total Paid': totalPaid } = row;
             const newAttendee = {
               firstName,
               lastName,
               email,
-              paidStatus: 'Paid',
-              pricePaid: ticketPrice,
+              paidStatus: 'Pre-Paid',
+              pricePaid: totalPaid,
+              arrived: false
             };
             attendees.push(newAttendee);
           });

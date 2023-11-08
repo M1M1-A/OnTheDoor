@@ -7,11 +7,6 @@ const cors = require('cors');
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 const eventsRouter = require('./routes/events');
-// const multer = require('multer');
-// const os = require('os');
-// const upload = multer({ dest: os.tmpdir() });
-// const EventsController = require("../api/controllers/events");
-
 
 const app = express();
 
