@@ -6,10 +6,7 @@ const upload = multer({ dest: os.tmpdir() });
 const EventsController = require("../controllers/events");
 
 router.post("/", upload.single("file"), EventsController.Create);
-
-// router.post("/", (req, res) => {
-//   console.log(req)
-// }, EventsController.Create);
+router.get('/', EventsController.GetEvent)
 
 module.exports = router;
 

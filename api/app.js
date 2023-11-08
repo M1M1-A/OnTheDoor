@@ -7,11 +7,6 @@ const cors = require('cors');
 const authenticationRouter = require("./routes/authentication");
 const usersRouter = require("./routes/users");
 const eventsRouter = require('./routes/events');
-// const multer = require('multer');
-// const os = require('os');
-// const upload = multer({ dest: os.tmpdir() });
-// const EventsController = require("../api/controllers/events");
-
 
 const app = express();
 
@@ -47,11 +42,7 @@ const tokenChecker = (req, res, next) => {
 app.use("/tokens", authenticationRouter);
 app.use("/users", usersRouter);
 app.use("/new-event", eventsRouter);
-
-// app.post('/new-event', upload.single("file"), (req, res) => {
-//   const file = req.file
-//   console.log("INDEX FILE", file)
-// })
+app.use("/get-event", eventsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
