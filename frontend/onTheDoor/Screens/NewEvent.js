@@ -3,26 +3,28 @@ import { Text, SafeAreaView, TextInput, Pressable, View } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
 import styles from '../Styles/NewEventStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation} from '@react-navigation/native'; 
+import { useNavigation, useRoute } from '@react-navigation/native'; 
 const FormData = require('form-data');
 
 const NewEvent = () => {  
   const [file, setFile] = useState(null);
   const [eventName, setEventName] = useState("")
-  const [userId, setUserId] = useState(null);
+  // const [userId, setUserId] = useState(null);
   const navigation = useNavigation(); 
+  const route = useRoute();
 
-  useEffect(() => {
-    const getUserId = async () => {
-      try {
-        const id = await AsyncStorage.getItem('userId');
-        setUserId(id);
-      } catch (error) {
-        console.error('Error retrieving user ID from AsyncStorage:', error);
-      }
-    };
-    getUserId();
-  }, []);
+  // useEffect(() => {
+  //   const getUserId = async () => {
+  //     try {
+  //       const id = await AsyncStorage.getItem('userId');
+  //       setUserId(id);
+  //     } catch (error) {
+  //       console.error('Error retrieving user ID from AsyncStorage:', error);
+  //     }
+  //   };
+  //   getUserId();
+  // }, []);
+  const { userId } = route.params
 
   const handleEventInput = (text) => {
     setEventName(text);
@@ -67,7 +69,7 @@ const NewEvent = () => {
   
         if (response.ok) {
           console.log('Upload successful');
-          navigation.navigate('Guestlist', {eventName: eventName})
+          navigation.navigate('Guestlist', {eventName, userId})
         } else {
           console.log('Upload failed');
           console.log("Response", response.status)

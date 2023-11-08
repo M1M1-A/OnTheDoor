@@ -37,7 +37,7 @@ const LogIn = () => {
       let data = await response.json();
       await AsyncStorage.setItem("token", data.token);
       await AsyncStorage.setItem("userId", data.userId);
-      navigation.navigate('NewEvent')
+      navigation.navigate('NewEvent', { userId: data.userId})
     }
   }
 
