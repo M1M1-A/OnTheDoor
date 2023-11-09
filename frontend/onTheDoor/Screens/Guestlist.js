@@ -11,6 +11,7 @@ import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "../Styles/GuestlistStyles";
+import { IP } from "@env";
 
 const Guestlist = () => {
   // const [userId, setUserId] = useState("");
@@ -33,7 +34,7 @@ const Guestlist = () => {
     const getEvent = async () => {
       try {
         const response = await fetch(
-          `http://192.168.0.12:8080/get-event?userId=${userId}&eventName=${eventName}`,
+          `${IP}/get-event?userId=${userId}&eventName=${eventName}`,
           {
             method: "GET",
           }

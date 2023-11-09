@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Text, SafeAreaView, TextInput, Pressable, View } from 'react-native';
-import * as DocumentPicker from 'expo-document-picker';
-import styles from '../Styles/NewEventStyles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation, useRoute } from '@react-navigation/native'; 
-const FormData = require('form-data');
+import React, { useState, useEffect } from "react";
+import { Text, SafeAreaView, TextInput, Pressable, View } from "react-native";
+import * as DocumentPicker from "expo-document-picker";
+import styles from "../Styles/NewEventStyles";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation, useRoute } from "@react-navigation/native";
+const FormData = require("form-data");
+import { IP } from "@env";
 
-const NewEvent = () => {  
+const NewEvent = () => {
   const [file, setFile] = useState(null);
-  const [eventName, setEventName] = useState("")
+  const [eventName, setEventName] = useState("");
   // const [userId, setUserId] = useState(null);
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
   const route = useRoute();
 
   // useEffect(() => {
@@ -24,23 +25,23 @@ const NewEvent = () => {
   //   };
   //   getUserId();
   // }, []);
-  const { userId } = route.params
+  const { userId } = route.params;
 
   const handleEventInput = (text) => {
     setEventName(text);
-  }
+  };
 
   const handleFileSelection = async () => {
     try {
       let result = await DocumentPicker.getDocumentAsync({
-        type: 'text/csv',
+        type: "text/csv",
       });
-      const file = result.assets[0]
+      const file = result.assets[0];
       setFile(file);
     } catch (err) {
-      console.log('Error', err);
+      console.log("Error", err);
     }
-  }
+  };
 
   const handleFileUpload = async () => {
     if (file) {
@@ -54,42 +55,41 @@ const NewEvent = () => {
           size: file.size,
         };
 
-        formData.append('file', fileToUpload);
-        formData.append('eventName', eventName);
-        formData.append('userId', userId);
-  
-        const response = await fetch('http://192.168.0.12:8080/new-event', {
-          method: 'POST',
+        formData.append("file", fileToUpload);
+        formData.append("eventName", eventName);
+        formData.append("userId", userId);
+
+        const response = await fetch(`${IP}/new-event`, {
+          method: "POST",
           body: formData,
           headers: {
             Accept: "application/json",
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         });
-  
+
         if (response.ok) {
-          console.log('Upload successful');
-          navigation.navigate('Guestlist', {eventName, userId})
+          console.log("Upload successful");
+          navigation.navigate("Guestlist", { eventName, userId });
         } else {
-          console.log('Upload failed');
-          console.log("Response", response.status)
+          console.log("Upload failed");
+          console.log("Response", response.status);
         }
       } catch (error) {
-        console.error('Error uploading file:', error);
+        console.error("Error uploading file:", error);
       }
     } else {
-      console.log('No file selected');
+      console.log("No file selected");
     }
   };
-    
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Name of event</Text>
-      <TextInput 
-            placeholder='Event Name' 
-            style={styles.inputFields}
-            onChangeText={handleEventInput}
+      <TextInput
+        placeholder="Event Name"
+        style={styles.inputFields}
+        onChangeText={handleEventInput}
       />
       <View style={styles.uploadContainer}>
         <Text style={styles.text}>Upload CSV file</Text>
