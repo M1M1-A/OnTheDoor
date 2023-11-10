@@ -1,22 +1,69 @@
-import React from 'react';
-import { Text, SafeAreaView, TextInput, Pressable, View, ScrollView } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { useNavigation} from '@react-navigation/native'; 
-import styles from '../Styles/CheckInStyles'
+import React, { useState, useEffect } from "react";
+import { Text, SafeAreaView, View, Button } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import styles from "../Styles/CheckInStyles";
+import { IP } from "@env";
 
-const CheckIn = () =>{
+const CheckIn = () => {
+  const [checkedIn, setCheckedIn] = useState(false);
   const route = useRoute();
-  const { attendee } = route.params;
+  const { guest, eventId } = route.params;
+  const guestId = guest._id;
+
+  useEffect(() => {
+    const fetchGuest = async () => {
+      try {
+        const response = await fetch(`${IP}/get-guest?guestId=${guestId}&eventId=${eventId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setCheckedIn(data.guest.arrived);
+        } else {
+          console.log("Error fetching guest information");
+        }
+      } catch (error) {
+        console.log("Error fetching guest information", error);
+      }
+    };
+
+    fetchGuest(); 
+  }, [guestId]);
+  
+
+  const handleCheckIn = async () => {
+    try {
+      const response = await fetch(`${IP}/check-in`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ guestId, eventId }),
+      });
+      if (response.ok) {
+        console.log("Guest Checked In ok");
+        setCheckedIn(true);
+      } else {
+        console.log("error checking in guest");
+      }
+    } catch (error) {
+      console.log("Error checking in guest", error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Attendee Details</Text>
-      <Text>First Name: {attendee.firstName}</Text>
-      <Text>Last Name: {attendee.lastName}</Text>
-      <Text>Email: {attendee.email}</Text>
-      <Text>Paid: {attendee.paidStatus}</Text>
+      <Text>Guest Details</Text>
+      <Text>
+        Name: {guest.firstName} {guest.lastName}
+      </Text>
+      <Text>Email: {guest.email}</Text>
+      <Text>Paid: {guest.paidStatus}</Text>
+      {checkedIn ? (
+        <Text>Checked In</Text>
+      ) : (
+        <Button title="CHECK IN" onPress={handleCheckIn} />
+      )}
     </SafeAreaView>
   );
-}
+};
 
 export default CheckIn;
