@@ -30,6 +30,7 @@ const Guestlist = () => {
     //   }
     // };
     // getUserId();
+    console.log(IP)
 
     const getEvent = async () => {
       try {
