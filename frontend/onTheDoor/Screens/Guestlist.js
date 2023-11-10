@@ -6,6 +6,7 @@ import {
   Pressable,
   View,
   ScrollView,
+  Button,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
@@ -14,24 +15,12 @@ import styles from "../Styles/GuestlistStyles";
 import { IP } from "@env";
 
 const Guestlist = () => {
-  // const [userId, setUserId] = useState("");
   const [event, setEvent] = useState({});
   const navigation = useNavigation();
   const route = useRoute();
   const { eventName, userId } = route.params;
 
   useEffect(() => {
-    // const getUserId = async () => {
-    //   try {
-    //     const id = await AsyncStorage.getItem('userId');
-    //     setUserId(id);
-    //   } catch (error) {
-    //     console.error('Error retrieving user ID from AsyncStorage:', error);
-    //   }
-    // };
-    // getUserId();
-    console.log(IP)
-
     const getEvent = async () => {
       try {
         const response = await fetch(
@@ -43,8 +32,7 @@ const Guestlist = () => {
         if (response.ok) {
           console.log("Event retrieved successfully");
           const data = await response.json();
-          const eventFound = data.event;
-          setEvent(eventFound);
+          setEvent(data.event);
         } else {
           console.log("No event retrieved");
         }
@@ -56,7 +44,7 @@ const Guestlist = () => {
     if (userId) {
       getEvent();
     }
-  }, [userId]);
+  }, []);
 
   const renderGuests = () => {
     const guests = event.guests;
@@ -79,10 +67,18 @@ const Guestlist = () => {
     navigation.navigate("CheckIn", { guest: guest, eventId: event._id });
   };
 
+  const handleAddGuest = () => {
+    navigation.navigate("AddGuest", {eventId: event._id, userId, eventName})
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.eventName}>{eventName}</Text>
       <Text style={styles.guestlist}>Guestlist</Text>
+      <Button 
+        title="+"
+        onPress={handleAddGuest}
+      />
       <ScrollView>
         <View>{event && renderGuests()}</View>
       </ScrollView>

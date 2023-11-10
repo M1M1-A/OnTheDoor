@@ -2,7 +2,33 @@ const Events = require("../models/events");
 const { ObjectId } = require("mongodb");
 
 const GuestController = {
-  // addGuest:
+  AddGuest: async (req, res) => {
+    try {
+      const { firstName, lastName, email, pricePaid, eventId} = req.body
+      const event = await Events.findById(eventId);
+      
+      if (event) {
+        const newGuest = {
+          firstName,
+          lastName,
+          email,
+          paidStatus: "Paid on door",
+          pricePaid,
+          arrived: true
+        }
+
+        event.guests.push(newGuest)
+        await event.save()
+
+        res.status(200).json({message: "Guest added successfully"})
+      } else {
+        res.status(400).json({message: "Event not found. Guest not added"})
+      }
+
+    } catch(error) {
+      console.log("Error adding guest", error)
+    }
+  },
 
   GetGuest: async (req, res) => {
     try {

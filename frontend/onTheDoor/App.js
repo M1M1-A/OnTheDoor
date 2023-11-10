@@ -5,6 +5,7 @@ import LogIn from './Screens/LogIn';
 import NewEvent from './Screens/NewEvent';
 import Guestlist from './Screens/Guestlist';
 import CheckIn from './Screens/CheckIn';
+import AddGuest from './Screens/AddGuest'
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,7 @@ export default function App() {
   return (
     <>
       <NavigationContainer>   
-        <Stack.Navigator initialRouteName='SignUp'>
+        <Stack.Navigator initialRouteName='LogIn'>
           <Stack.Screen 
             name='SignUp' 
             component={SignUp}
@@ -47,6 +48,14 @@ export default function App() {
           <Stack.Screen 
             name='CheckIn' 
             component={CheckIn}
+            options={{
+              headerShown: true, 
+              animationEnabled: false, 
+            }}
+          />
+          <Stack.Screen 
+            name='AddGuest' 
+            component={AddGuest}
             options={{
               headerShown: true, 
               animationEnabled: false, 

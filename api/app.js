@@ -46,6 +46,7 @@ app.use("/new-event", eventsRouter);
 app.use("/get-event", eventsRouter)
 app.use("/check-in", guestsRouter)
 app.use("/get-guest", guestsRouter)
+app.use("/add-guest", guestsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
