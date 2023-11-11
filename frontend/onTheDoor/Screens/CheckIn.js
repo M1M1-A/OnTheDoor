@@ -1,33 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Text, SafeAreaView, View, Button } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import styles from "../Styles/CheckInStyles";
 import { IP } from "@env";
 
 const CheckIn = () => {
-  const [checkedIn, setCheckedIn] = useState(false);
   const route = useRoute();
   const { guest, eventId } = route.params;
+  const [checkedIn, setCheckedIn] = useState(guest.arrived);
   const guestId = guest._id;
-
-  useEffect(() => {
-    const fetchGuest = async () => {
-      try {
-        const response = await fetch(`${IP}/get-guest?guestId=${guestId}&eventId=${eventId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setCheckedIn(data.guest.arrived);
-        } else {
-          console.log("Error fetching guest information");
-        }
-      } catch (error) {
-        console.log("Error fetching guest information", error);
-      }
-    };
-
-    fetchGuest(); 
-  }, [guestId]);
-  
 
   const handleCheckIn = async () => {
     try {
