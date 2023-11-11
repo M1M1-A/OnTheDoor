@@ -15,24 +15,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     fontSize: 22,
-    textAlign: 'center',
-    backgroundColor: '#fff',
+    textAlign: "center",
+    backgroundColor: "#fff",
   },
   button: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     margin: 10,
     padding: 5,
     height: 30,
     width: 150,
     borderWidth: 1,
     borderRadius: 6,
-    backgroundColor: 'cornflowerblue',
+    backgroundColor: "cornflowerblue",
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-  }
+  },
 });
 
 export default styles;

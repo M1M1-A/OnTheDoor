@@ -16,12 +16,12 @@ const Guestlist = () => {
   const [event, setEvent] = useState({});
   const navigation = useNavigation();
   const route = useRoute();
-  const { eventName, userId } = route.params;
+  const { eventName, userId, eventId } = route.params;
 
   const getEvent = async () => {
     try {
       const response = await fetch(
-        `${IP}/get-event?userId=${userId}&eventName=${eventName}`,
+        `${IP}/events/get-event?userId=${userId}&eventId=${eventId}`,
         {
           method: "GET",
         }
@@ -67,11 +67,11 @@ const Guestlist = () => {
   };
 
   const handlePress = (guest) => {
-    navigation.navigate("CheckIn", { guest: guest, eventId: event._id });
+    navigation.navigate("CheckIn", { guest, eventId });
   };
 
   const handleAddGuest = () => {
-    navigation.navigate("AddGuest", {eventId: event._id, userId, eventName})
+    navigation.navigate("AddGuest", {eventId, userId, eventName})
   }
 
   return (

@@ -30,23 +30,6 @@ const GuestController = {
     }
   },
 
-  GetGuest: async (req, res) => {
-    try {
-      const { guestId, eventId } = req.query
-      const event = await Events.findById(eventId);
-
-      if (event) {
-        const guest = event.guests.find((guest) => guest._id.toString() === guestId);
-        res.status(200).json({message: "Guest retrieved", guest: guest})
-      } else {
-        res.status(404).json({message: "No Guest found"})
-      }
-
-    } catch(error) {
-      console.log("Error retrieving Guest", error)
-    }
-  },
-
   UpdateGuestArrival: async (req, res) => {
     try {
       const { guestId } = req.body;
