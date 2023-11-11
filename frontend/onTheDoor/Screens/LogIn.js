@@ -10,6 +10,7 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigation = useNavigation();
+  console.log(IP)
 
   const handleEmailInput = (text) => {
     setEmail(text);
@@ -38,7 +39,7 @@ const LogIn = () => {
       let data = await response.json();
       await AsyncStorage.setItem("token", data.token);
       await AsyncStorage.setItem("userId", data.userId);
-      navigation.navigate("NewEvent", { userId: data.userId });
+      navigation.navigate("AllEvents", { userId: data.userId });
     }
   };
 

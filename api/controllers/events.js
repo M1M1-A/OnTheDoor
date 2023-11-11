@@ -53,11 +53,12 @@ const EventsController = {
   },
   GetEvent: async (req, res) => {
     try {
-      const { eventName, userId } = req.query;
+      const { eventId, userId } = req.query;
       const userObjectId = ObjectId(userId);
+      const eventObjectId = ObjectId(eventId);
       const event = await Events.findOne({
         user: userObjectId,
-        eventName: eventName,
+        _id: eventObjectId,
       });
       if (!event) {
         res.status(404).json({ message: "Event not found" });
@@ -69,6 +70,29 @@ const EventsController = {
       res.status(500).json({ error: "Error retrieving event" });
     }
   },
+  GetAllEvents: async (req, res) => {
+    try {
+      const { userId } = req.query;
+      const userObjectId = ObjectId(userId);
+      const events = await Events.find({
+        user: userObjectId,
+      });
+  
+      if (!events || events.length === 0) {
+        res.status(404).json({ message: "Events not found" });
+      } else {
+        const mappedEvents = events.map((event) => ({
+          eventId: event._id,
+          eventName: event.eventName,
+        }));
+        res.status(200).json({ events: mappedEvents });
+        console.log("All events retrieved successfully");
+      }
+    } catch (error) {
+      console.log("Error retrieving events", error);
+      res.status(500).json({ error: "Error retrieving events" });
+    }
+  },  
 };
 
 module.exports = EventsController;

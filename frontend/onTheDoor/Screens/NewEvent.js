@@ -10,21 +10,9 @@ import { IP } from "@env";
 const NewEvent = () => {
   const [file, setFile] = useState(null);
   const [eventName, setEventName] = useState("");
-  // const [userId, setUserId] = useState(null);
+  const [eventId, setEventId] = useState("");
   const navigation = useNavigation();
   const route = useRoute();
-
-  // useEffect(() => {
-  //   const getUserId = async () => {
-  //     try {
-  //       const id = await AsyncStorage.getItem('userId');
-  //       setUserId(id);
-  //     } catch (error) {
-  //       console.error('Error retrieving user ID from AsyncStorage:', error);
-  //     }
-  //   };
-  //   getUserId();
-  // }, []);
   const { userId } = route.params;
 
   const handleEventInput = (text) => {
@@ -61,7 +49,7 @@ const NewEvent = () => {
 
         console.log(IP)
 
-        const response = await fetch(`${IP}/new-event`, {
+        const response = await fetch(`${IP}/events/new-event`, {
           method: "POST",
           body: formData,
           headers: {
@@ -72,6 +60,7 @@ const NewEvent = () => {
 
         if (response.ok) {
           console.log("Upload successful");
+          console.log(response.body)
           navigation.navigate("Guestlist", { eventName, userId });
         } else {
           console.log("Upload failed");

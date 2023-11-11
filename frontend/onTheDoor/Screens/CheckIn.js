@@ -12,7 +12,7 @@ const CheckIn = () => {
 
   const handleCheckIn = async () => {
     try {
-      const response = await fetch(`${IP}/check-in`, {
+      const response = await fetch(`${IP}/guests/check-in`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

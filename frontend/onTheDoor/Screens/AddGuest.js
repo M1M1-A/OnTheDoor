@@ -38,7 +38,7 @@ const AddGuest = () => {
 
   const handleAddGuest = async () => {
     try {
-      const response = await fetch(`${IP}/add-guest`, {
+      const response = await fetch(`${IP}/guests/add-guest`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const AddGuest = () => {
       
       if (response.ok) {
         console.log("Guest added and checked in")
-        navigation.navigate("Guestlist", {eventName, userId})
+        navigation.navigate("Guestlist", {eventId, userId})
       }
 
     } catch(error) {
