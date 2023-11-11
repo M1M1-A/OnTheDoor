@@ -10,7 +10,6 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigation = useNavigation();
-  console.log(IP)
 
   const handleEmailInput = (text) => {
     setEmail(text);

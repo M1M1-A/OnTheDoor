@@ -6,57 +6,48 @@ import {
   Pressable,
   View,
   ScrollView,
+  Button,
 } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import styles from "../Styles/GuestlistStyles";
 import { IP } from "@env";
 
 const Guestlist = () => {
-  // const [userId, setUserId] = useState("");
   const [event, setEvent] = useState({});
   const navigation = useNavigation();
   const route = useRoute();
   const { eventName, userId } = route.params;
 
-  useEffect(() => {
-    // const getUserId = async () => {
-    //   try {
-    //     const id = await AsyncStorage.getItem('userId');
-    //     setUserId(id);
-    //   } catch (error) {
-    //     console.error('Error retrieving user ID from AsyncStorage:', error);
-    //   }
-    // };
-    // getUserId();
-    console.log(IP)
-
-    const getEvent = async () => {
-      try {
-        const response = await fetch(
-          `${IP}/get-event?userId=${userId}&eventName=${eventName}`,
-          {
-            method: "GET",
-          }
-        );
-        if (response.ok) {
-          console.log("Event retrieved successfully");
-          const data = await response.json();
-          const eventFound = data.event;
-          setEvent(eventFound);
-        } else {
-          console.log("No event retrieved");
+  const getEvent = async () => {
+    try {
+      const response = await fetch(
+        `${IP}/get-event?userId=${userId}&eventName=${eventName}`,
+        {
+          method: "GET",
         }
-      } catch (error) {
-        console.log(error);
+      );
+      if (response.ok) {
+        console.log("Event retrieved successfully");
+        const data = await response.json();
+        setEvent(data.event);
+      } else {
+        console.log("No event retrieved");
       }
-    };
-
-    if (userId) {
-      getEvent();
+    } catch (error) {
+      console.log(error);
     }
-  }, [userId]);
+  };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      if (userId) {
+        getEvent();
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation, userId, eventName]);
+  
 
   const renderGuests = () => {
     const guests = event.guests;
@@ -79,10 +70,18 @@ const Guestlist = () => {
     navigation.navigate("CheckIn", { guest: guest, eventId: event._id });
   };
 
+  const handleAddGuest = () => {
+    navigation.navigate("AddGuest", {eventId: event._id, userId, eventName})
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.eventName}>{eventName}</Text>
       <Text style={styles.guestlist}>Guestlist</Text>
+      <Button 
+        title="+"
+        onPress={handleAddGuest}
+      />
       <ScrollView>
         <View>{event && renderGuests()}</View>
       </ScrollView>
