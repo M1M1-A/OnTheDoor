@@ -13,7 +13,9 @@ import styles from "../Styles/GuestlistStyles";
 import { IP } from "@env";
 
 const Guestlist = () => {
-  const [event, setEvent] = useState({});
+  const [event, setEvent] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const navigation = useNavigation();
   const route = useRoute();
   const { eventName, userId, eventId } = route.params;
@@ -45,14 +47,25 @@ const Guestlist = () => {
       }
     });
 
+    if (event && event.guests) {
+      const searchResults = event.guests.filter((guest) =>
+        `${guest.firstName} ${guest.lastName}`
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      );
+
+      setSearchResults(searchResults);
+    }
+
     return unsubscribe;
-  }, [navigation, userId, eventName]);
-  
+  }, [navigation, userId, eventName, searchTerm, event]);
 
   const renderGuests = () => {
-    const guests = event.guests;
-    if (guests && guests.length > 0) {
-      return guests.map((guest) => (
+    const guestsToRender =
+      searchResults.length > 0 ? searchResults : event.guests;
+
+    if (guestsToRender && guestsToRender.length > 0) {
+      return guestsToRender.map((guest) => (
         <Pressable
           key={guest._id}
           style={styles.guest}
@@ -71,16 +84,19 @@ const Guestlist = () => {
   };
 
   const handleAddGuest = () => {
-    navigation.navigate("AddGuest", {eventId, userId, eventName})
-  }
+    navigation.navigate("AddGuest", { eventId, userId, eventName });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.eventName}>{eventName}</Text>
       <Text style={styles.guestlist}>Guestlist</Text>
-      <Button 
-        title="+"
-        onPress={handleAddGuest}
+      <Button title="+" onPress={handleAddGuest} />
+      <TextInput
+        style={styles.searchBar}
+        placeholder="Search by name"
+        value={searchTerm}
+        onChangeText={(text) => setSearchTerm(text)}
       />
       <ScrollView>
         <View>{event && renderGuests()}</View>
