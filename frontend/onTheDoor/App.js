@@ -7,6 +7,7 @@ import Guestlist from './Screens/Guestlist';
 import CheckIn from './Screens/CheckIn';
 import AddGuest from './Screens/AddGuest'
 import AllEvents from './Screens/AllEvents';
+import Dashboard from './Screens/Dashboard';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,6 +66,14 @@ export default function App() {
           <Stack.Screen 
             name='AddGuest' 
             component={AddGuest}
+            options={{
+              headerShown: true, 
+              animationEnabled: false, 
+            }}
+          />
+          <Stack.Screen 
+            name='Dashboard' 
+            component={Dashboard}
             options={{
               headerShown: true, 
               animationEnabled: false, 
