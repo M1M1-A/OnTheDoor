@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, StyleSheet, ScrollView, View } from "react-native"
+import { Text, View } from "react-native"
 import { useRoute } from "@react-navigation/native";
 import PieChart from 'react-native-pie-chart';
+import styles from "../Styles/DashboardStyles";
 
 const Dashboard = () => {
   const [ arrivedCount, setArrivedCount ] = useState(0)
@@ -42,63 +43,60 @@ const Dashboard = () => {
       const calculateTotal = prePaidSales + salesOnDoor
         setTotalSales(calculateTotal)
     }
-  }, [event]);
+  }, [event, prePaidSales, salesOnDoor]);
 
-  const widthAndHeight = 250
-  const series = [arrivedCount, yetToArriveCount]
+  const totalGuests = arrivedCount + yetToArriveCount
+  const arrivedPercentage = (arrivedCount / totalGuests) * 100
+  const yetToArrivePercentage = (yetToArriveCount / totalGuests) * 100
+
+  const widthAndHeight = 230
+  const arrivedSeries = [arrivedCount, yetToArriveCount]
+  const salesSeries = [prePaidSales, salesOnDoor]
   const sliceColor = ['#fbd203', '#ff9100']
 
   return (
-    <SafeAreaView>
-      <Text>DASHBOARD</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>GUESTS</Text>
       { yetToArriveCount > 0 && (
         <PieChart
           widthAndHeight={widthAndHeight}
-          series={series}
+          series={arrivedSeries}
           sliceColor={sliceColor}
           coverRadius={0.45}
           coverFill={'#FFF'}
+          style={styles.pieChart}
         />
       )}
       <View style={styles.labelsContainer}>
         <View style={styles.arrived}/>
-        <Text>Number Arrived: {arrivedCount}</Text>
+        <Text>Arrived: {arrivedCount} ({arrivedPercentage.toFixed()}%)</Text>
       </View>
       <View style={styles.labelsContainer}>
         <View style={styles.yetToArrive}/>
-        <Text>Number yet to arrive: {yetToArriveCount}</Text>
+        <Text>Yet to arrive: {yetToArriveCount} ({yetToArrivePercentage.toFixed()}%)</Text>
       </View>
-      <Text>Pre Paid Sales: {prePaidSales.toFixed(2)}</Text>
-      <Text>Sales On Door: {salesOnDoor.toFixed(2)}</Text>
+      <Text style={styles.text}>SALES</Text>
+      { prePaidSales > 0 && (
+        <PieChart
+            widthAndHeight={widthAndHeight}
+            series={salesSeries}
+            sliceColor={sliceColor}
+            coverRadius={0.45}
+            coverFill={'#FFF'}
+            style={styles.pieChart}
+        />
+      )}
+      <View style={styles.labelsContainer}>
+        <View style={styles.arrived}/>
+        <Text>Pre Paid Sales: {prePaidSales.toFixed(2)}</Text>
+      </View>
+      <View style={styles.labelsContainer}>
+        <View style={styles.yetToArrive}/>
+        <Text>Sales On Door: {salesOnDoor.toFixed(2)}</Text>
+      </View>
       <Text>Total Sales: {totalSales.toFixed(2)}</Text>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    margin: 10,
-  },
-  labelsContainer: {
-    flexDirection: 'row',
-  },
-  arrived: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#fbd203',
-    marginRight: 10,
-  },
-  yetToArrive: {
-    width: 20,
-    height: 20,
-    backgroundColor: '#ff9100',
-    marginRight: 10,
-  }
-})
 
 export default Dashboard;
