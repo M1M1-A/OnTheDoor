@@ -87,6 +87,10 @@ const Guestlist = () => {
     navigation.navigate("AddGuest", { eventId, userId, eventName });
   };
 
+  const handleNavigateToDashboard = () => {
+    navigation.navigate("Dashboard", { event })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.eventName}>{eventName}</Text>
@@ -101,6 +105,12 @@ const Guestlist = () => {
       <ScrollView>
         <View>{event && renderGuests()}</View>
       </ScrollView>
+      <View>
+        <Button
+          title='DASHBOARD'
+          onPress={handleNavigateToDashboard}
+        />
+      </View>
     </SafeAreaView>
   );
 };

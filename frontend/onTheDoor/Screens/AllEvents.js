@@ -5,6 +5,7 @@ import {
   Pressable,
   View,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
@@ -18,32 +19,52 @@ const AllEvents = () => {
   const route = useRoute()
   const {userId} = route.params
 
-  useEffect(() => {
-    const getAllEvents = async () => {
-      try {
-        const response = await fetch(
-          `${IP}/events/get-all-events?userId=${userId}`,
-          { method: "GET" }
-        )
-        if (response.ok) {
-          const data = await response.json(); 
-          console.log("Events retrieved successfully")
-          setEvents(data.events)
-        }
-      } catch(error) {
-        console.log("Error retrieving Events", error)
+  const getAllEvents = async () => {
+    try {
+      const response = await fetch(
+        `${IP}/events/get-all-events?userId=${userId}`,
+        { method: "GET" }
+      )
+      if (response.ok) {
+        const data = await response.json(); 
+        console.log("All events retrieved successfully")
+        setEvents(data.events)
       }
+    } catch(error) {
+      console.log("Error retrieving Events", error)
     }
-    getAllEvents()
-  }, [])
+  };
+  
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      if (userId) {
+        getAllEvents();
+      }
+    });
+
+    return unsubscribe;
+  }, [userId, navigation]);
 
   handlePress = (event) => {
     navigation.navigate("Guestlist", { eventId: event.eventId, userId, eventName: event.eventName  })
   }
   
+  handleNavigation = () => {
+    navigation.navigate("NewEvent", { userId })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.allEvents}>All Events</Text>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity 
+          onPress={handleNavigation}
+          style={styles.button}
+          >
+          <Text style={styles.buttonText}>CREATE NEW EVENT</Text>
+        </TouchableOpacity>
+      </View>
       <ScrollView>
       {events.map((event) => (
         <Pressable 
