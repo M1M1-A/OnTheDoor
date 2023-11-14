@@ -4,9 +4,10 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  Image,
+  View
 } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
+import { useRoute, useNavigation  } from "@react-navigation/native";
 import { IP } from "@env";
 import styles from "../Styles/AddGuestStyles"
 
@@ -18,7 +19,7 @@ const AddGuest = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
-  const {eventId, eventName, userId} = route.params
+  const {event, userId} = route.params
 
   const handleFirstNameInput = (text) => {
     setFirstName(text);
@@ -48,18 +49,27 @@ const AddGuest = () => {
           lastName,
           email,
           pricePaid,
-          eventId,
+          eventId: event._id,
         }),
       })
       
       if (response.ok) {
         console.log("Guest added and checked in")
-        navigation.navigate("Guestlist", {eventId, userId})
+        navigation.navigate("Guestlist", {eventId: event._id, userId})
       }
 
     } catch(error) {
       console.log("Error adding Guest", error)
     }
+  }
+
+
+  const handleNavigateToGuestlist = () => {
+    navigation.navigate("Guestlist", { eventName: event.eventName, userId, eventId: event.eventId })
+  }
+
+  const handleNavigateToDashboard = () => {
+    navigation.navigate("Dashboard", { event })
   }
 
   return (
@@ -91,6 +101,32 @@ const AddGuest = () => {
       >
         <Text style={styles.buttonText}>ADD GUEST</Text>
       </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <View>
+          <TouchableOpacity 
+            style={styles.button2}
+            onPress={handleNavigateToGuestlist}
+          >
+            <Image
+              style={styles.image}
+              source={require('../assets/analytics.png')}
+            />
+            <Text>GUESTLIST</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.button2}
+            onPress={handleNavigateToDashboard}
+          >
+            <Image
+              style={styles.image}
+              source={require('../assets/contact-list.png')}
+            />
+            <Text>DASHBOARD</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   );
 

@@ -7,6 +7,8 @@ import {
   View,
   ScrollView,
   Button,
+  TouchableOpacity,
+  Image
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import styles from "../Styles/GuestlistStyles";
@@ -80,16 +82,22 @@ const Guestlist = () => {
   };
 
   const handlePress = (guest) => {
-    navigation.navigate("CheckIn", { guest, eventId });
+    navigation.navigate("CheckIn", { guest, event, userId });
   };
 
   const handleAddGuest = () => {
-    navigation.navigate("AddGuest", { eventId, userId, eventName });
+    navigation.navigate("AddGuest", { userId, event });
   };
+
+  const handleNavigateToGuestlist = () => {
+    navigation.navigate("Guestlist", { eventName, userId, eventId })
+  }
 
   const handleNavigateToDashboard = () => {
     navigation.navigate("Dashboard", { event })
   }
+
+  console.log("Event ID", eventId)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -105,11 +113,31 @@ const Guestlist = () => {
       <ScrollView>
         <View>{event && renderGuests()}</View>
       </ScrollView>
-      <View>
-        <Button
-          title='DASHBOARD'
-          onPress={handleNavigateToDashboard}
-        />
+      <View style={styles.buttonContainer}>
+        <View>
+          <TouchableOpacity 
+            style={styles.button}
+            onPress={handleNavigateToGuestlist}
+          >
+            <Image
+              style={styles.image}
+              source={require('../assets/analytics.png')}
+            />
+            <Text>GUESTLIST</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleNavigateToDashboard}
+          >
+            <Image
+              style={styles.image}
+              source={require('../assets/contact-list.png')}
+            />
+            <Text>DASHBOARD</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

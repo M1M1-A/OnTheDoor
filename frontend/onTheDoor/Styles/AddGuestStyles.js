@@ -33,6 +33,25 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    backgroundColor: 'white',
+  },
+  button2: {
+    alignItems: 'center',
+    width: 200,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+  },
+  image: {
+    width: 40,
+    height: 40,
+    marginBottom: 15,
+  }
 });
 
 export default styles;
