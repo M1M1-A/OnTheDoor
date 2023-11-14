@@ -23,7 +23,7 @@ const EventsController = {
             const {
               "First Name": firstName,
               "Last Name": lastName,
-              Email: email,
+              "Email": email,
               "Total Paid": totalPaid,
             } = row;
             const newGuest = {
@@ -44,7 +44,7 @@ const EventsController = {
           await newEvent.save();
           res
             .status(200)
-            .json({ message: "File data received and processed successfully" });
+            .json({ message: "File data received and processed successfully", eventId: newEvent._id });
         });
     } catch (error) {
       console.error("Error processing file data:", error);

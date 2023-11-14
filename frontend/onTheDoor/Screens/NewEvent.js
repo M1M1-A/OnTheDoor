@@ -10,7 +10,7 @@ import { IP } from "@env";
 const NewEvent = () => {
   const [file, setFile] = useState(null);
   const [eventName, setEventName] = useState("");
-  const [eventId, setEventId] = useState("");
+  // const [eventId, setEventId] = useState("");
   const navigation = useNavigation();
   const route = useRoute();
   const { userId } = route.params;
@@ -59,12 +59,14 @@ const NewEvent = () => {
         });
 
         if (response.ok) {
-          console.log("Upload successful");
-          console.log(response.body)
-          navigation.navigate("Guestlist", { eventName, userId });
+          console.log("Upload successful");         
+          const data = await response.json();
+          const eventId = data.eventId
+          navigation.navigate("Guestlist", { eventName, userId, eventId });
+
         } else {
           console.log("Upload failed");
-          console.log("Response", response.status);
+          console.log("Response", response.message);
         }
       } catch (error) {
         console.error("Error uploading file:", error);
