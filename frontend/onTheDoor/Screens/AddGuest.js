@@ -19,7 +19,7 @@ const AddGuest = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
-  const {event, userId} = route.params
+  const {userId, eventId} = route.params
 
   const handleFirstNameInput = (text) => {
     setFirstName(text);
@@ -49,13 +49,13 @@ const AddGuest = () => {
           lastName,
           email,
           pricePaid,
-          eventId: event._id,
+          eventId
         }),
       })
       
       if (response.ok) {
         console.log("Guest added and checked in")
-        navigation.navigate("Guestlist", {eventId: event._id, userId})
+        navigation.navigate("Guestlist", {eventId, userId})
       }
 
     } catch(error) {
@@ -65,12 +65,12 @@ const AddGuest = () => {
 
 
   const handleNavigateToGuestlist = () => {
-    navigation.navigate("Guestlist", { eventName: event.eventName, userId, eventId: event.eventId })
+    navigation.navigate("Guestlist", { userId, eventId })
   }
 
-  const handleNavigateToDashboard = () => {
-    navigation.navigate("Dashboard", { event })
-  }
+  // const handleNavigateToDashboard = () => {
+  //   navigation.navigate("Dashboard", { event })
+  // }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -114,7 +114,7 @@ const AddGuest = () => {
             <Text>GUESTLIST</Text>
           </TouchableOpacity>
         </View>
-        <View>
+        {/* <View>
           <TouchableOpacity
             style={styles.button2}
             onPress={handleNavigateToDashboard}
@@ -125,7 +125,7 @@ const AddGuest = () => {
             />
             <Text>DASHBOARD</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );

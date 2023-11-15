@@ -7,10 +7,9 @@ import { IP } from "@env";
 const CheckIn = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const { guest, event, userId } = route.params;
+  const { guest, userId, eventId } = route.params;
   const [checkedIn, setCheckedIn] = useState(guest.arrived);
   const guestId = guest._id;
-  const eventId = event._id
 
   const handleCheckIn = async () => {
     try {
@@ -33,11 +32,11 @@ const CheckIn = () => {
   };
 
   const handleNavigateToGuestlist = () => {
-    navigation.navigate("Guestlist", { eventName: event.eventName, userId, eventId})
+    navigation.navigate("Guestlist", { userId, eventId})
   }
 
   const handleNavigateToDashboard = () => {
-    navigation.navigate("Dashboard", { event })
+    navigation.navigate("Dashboard", { userId, eventId })
   }
 
   return (
