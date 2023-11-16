@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image,
-  View
 } from "react-native";
 import { useRoute, useNavigation  } from "@react-navigation/native";
 import { IP } from "@env";
@@ -63,15 +61,6 @@ const AddGuest = () => {
     }
   }
 
-
-  const handleNavigateToGuestlist = () => {
-    navigation.navigate("Guestlist", { userId, eventId })
-  }
-
-  // const handleNavigateToDashboard = () => {
-  //   navigation.navigate("Dashboard", { event })
-  // }
-
   return (
     <SafeAreaView style={styles.container}>
       <TextInput 
@@ -101,32 +90,6 @@ const AddGuest = () => {
       >
         <Text style={styles.buttonText}>ADD GUEST</Text>
       </TouchableOpacity>
-      <View style={styles.buttonContainer}>
-        <View>
-          <TouchableOpacity 
-            style={styles.button2}
-            onPress={handleNavigateToGuestlist}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/analytics.png')}
-            />
-            <Text>GUESTLIST</Text>
-          </TouchableOpacity>
-        </View>
-        {/* <View>
-          <TouchableOpacity
-            style={styles.button2}
-            onPress={handleNavigateToDashboard}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/contact-list.png')}
-            />
-            <Text>DASHBOARD</Text>
-          </TouchableOpacity>
-        </View> */}
-      </View>
     </SafeAreaView>
   );
 

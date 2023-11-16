@@ -96,7 +96,7 @@ const Guestlist = () => {
   }
 
   const handleNavigateToDashboard = () => {
-    navigation.navigate("Dashboard", { eventId, userId })
+    navigation.navigate("Dashboard", { event })
   }
 
   return (
@@ -114,7 +114,7 @@ const Guestlist = () => {
         <View>{event && renderGuests()}</View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <View>
+        {/* <View>
           <TouchableOpacity 
             style={styles.button}
             onPress={handleNavigateToGuestlist}
@@ -125,7 +125,7 @@ const Guestlist = () => {
             />
             <Text>GUESTLIST</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View>
           <TouchableOpacity
             style={styles.button}

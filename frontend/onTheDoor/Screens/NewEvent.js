@@ -47,8 +47,6 @@ const NewEvent = () => {
         formData.append("eventName", eventName);
         formData.append("userId", userId);
 
-        console.log(IP)
-
         const response = await fetch(`${IP}/events/new-event`, {
           method: "POST",
           body: formData,

@@ -6,7 +6,6 @@ import { IP } from "@env";
 
 const CheckIn = () => {
   const route = useRoute();
-  const navigation = useNavigation();
   const { guest, userId, eventId } = route.params;
   const [checkedIn, setCheckedIn] = useState(guest.arrived);
   const guestId = guest._id;
@@ -31,14 +30,6 @@ const CheckIn = () => {
     }
   };
 
-  const handleNavigateToGuestlist = () => {
-    navigation.navigate("Guestlist", { userId, eventId})
-  }
-
-  const handleNavigateToDashboard = () => {
-    navigation.navigate("Dashboard", { userId, eventId })
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <Text>Guest Details</Text>
@@ -52,32 +43,6 @@ const CheckIn = () => {
       ) : (
         <Button title="CHECK IN" onPress={handleCheckIn} />
       )}
-      <View style={styles.buttonContainer}>
-        <View>
-          <TouchableOpacity 
-            style={styles.button}
-            onPress={handleNavigateToGuestlist}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/analytics.png')}
-            />
-            <Text>GUESTLIST</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleNavigateToDashboard}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/contact-list.png')}
-            />
-            <Text>DASHBOARD</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     </SafeAreaView>
   );
 };
