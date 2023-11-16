@@ -7,6 +7,8 @@ import {
   View,
   ScrollView,
   Button,
+  TouchableOpacity,
+  Image
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import styles from "../Styles/GuestlistStyles";
@@ -14,11 +16,12 @@ import { IP } from "@env";
 
 const Guestlist = () => {
   const [event, setEvent] = useState(null);
+  const [eventName, setEventName] = useState("")
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const navigation = useNavigation();
   const route = useRoute();
-  const { eventName, userId, eventId } = route.params;
+  const { userId, eventId } = route.params;
 
   const getEvent = async () => {
     try {
@@ -32,6 +35,7 @@ const Guestlist = () => {
         console.log("Event retrieved successfully");
         const data = await response.json();
         setEvent(data.event);
+        setEventName(data.event.eventName)
       } else {
         console.log("No event retrieved");
       }
@@ -58,7 +62,7 @@ const Guestlist = () => {
     }
 
     return unsubscribe;
-  }, [navigation, userId, eventName, searchTerm, event]);
+  }, [navigation, userId, searchTerm, event]);
 
   const renderGuests = () => {
     const guestsToRender =
@@ -80,12 +84,16 @@ const Guestlist = () => {
   };
 
   const handlePress = (guest) => {
-    navigation.navigate("CheckIn", { guest, eventId });
+    navigation.navigate("CheckIn", { guest, userId, eventId });
   };
 
   const handleAddGuest = () => {
-    navigation.navigate("AddGuest", { eventId, userId, eventName });
+    navigation.navigate("AddGuest", { userId, eventId });
   };
+
+  const handleNavigateToGuestlist = () => {
+    navigation.navigate("Guestlist", { userId, eventId })
+  }
 
   const handleNavigateToDashboard = () => {
     navigation.navigate("Dashboard", { event })
@@ -105,11 +113,31 @@ const Guestlist = () => {
       <ScrollView>
         <View>{event && renderGuests()}</View>
       </ScrollView>
-      <View>
-        <Button
-          title='DASHBOARD'
-          onPress={handleNavigateToDashboard}
-        />
+      <View style={styles.buttonContainer}>
+        {/* <View>
+          <TouchableOpacity 
+            style={styles.button}
+            onPress={handleNavigateToGuestlist}
+          >
+            <Image
+              style={styles.image}
+              source={require('../assets/analytics.png')}
+            />
+            <Text>GUESTLIST</Text>
+          </TouchableOpacity>
+        </View> */}
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleNavigateToDashboard}
+          >
+            <Image
+              style={styles.image}
+              source={require('../assets/contact-list.png')}
+            />
+            <Text>DASHBOARD</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

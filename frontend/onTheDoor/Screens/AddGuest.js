@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
+import { useRoute, useNavigation  } from "@react-navigation/native";
 import { IP } from "@env";
 import styles from "../Styles/AddGuestStyles"
 
@@ -18,7 +17,7 @@ const AddGuest = () => {
 
   const navigation = useNavigation();
   const route = useRoute();
-  const {eventId, eventName, userId} = route.params
+  const {userId, eventId} = route.params
 
   const handleFirstNameInput = (text) => {
     setFirstName(text);
@@ -48,7 +47,7 @@ const AddGuest = () => {
           lastName,
           email,
           pricePaid,
-          eventId,
+          eventId
         }),
       })
       

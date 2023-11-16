@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Text, SafeAreaView, View, Button } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { Text, SafeAreaView, View, Button, TouchableOpacity, Image } from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import styles from "../Styles/CheckInStyles";
 import { IP } from "@env";
 
 const CheckIn = () => {
   const route = useRoute();
-  const { guest, eventId } = route.params;
+  const { guest, userId, eventId } = route.params;
   const [checkedIn, setCheckedIn] = useState(guest.arrived);
   const guestId = guest._id;
 

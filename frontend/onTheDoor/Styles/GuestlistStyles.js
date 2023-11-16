@@ -41,6 +41,25 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 6,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    backgroundColor: 'white',
+  },
+  button: {
+    alignItems: 'center',
+    width: 200,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 5,
+  },
+  image: {
+    width: 40,
+    height: 40,
+    marginBottom: 15,
+  }
 });
 
 export default styles;
