@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, SafeAreaView, TextInput, TouchableOpacity } from "react-native";
+import { Text, SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "../Styles/SignUpStyles";
 import { IP } from "@env";
@@ -54,6 +54,7 @@ const SignUp = () => {
   };
 
   return (
+    <>
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>SIGN UP</Text>
       <TextInput
@@ -90,6 +91,7 @@ const SignUp = () => {
         <Text style={styles.button2Text}>LOG IN</Text>
       </TouchableOpacity>
     </SafeAreaView>
+    </> 
   );
 };
 

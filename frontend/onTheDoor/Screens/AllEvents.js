@@ -12,12 +12,11 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "../Styles/AllEventsStyles";
 import { IP } from "@env";
 
-
 const AllEvents = () => {
   const [ events, setEvents ] = useState([])
   const navigation = useNavigation();
   const route = useRoute()
-  const {userId} = route.params
+  const {userId} = route.params;
 
   const getAllEvents = async () => {
     try {
@@ -35,7 +34,6 @@ const AllEvents = () => {
     }
   };
   
-
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       if (userId) {
@@ -47,7 +45,7 @@ const AllEvents = () => {
   }, [userId, navigation]);
 
   handlePress = (event) => {
-    navigation.navigate("Guestlist", { eventId: event.eventId, userId, eventName: event.eventName  })
+    navigation.navigate("TabNavigation2", { eventId: event.eventId, userId, eventName: event.eventName  })
   }
   
   handleNavigation = () => {

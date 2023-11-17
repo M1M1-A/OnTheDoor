@@ -8,6 +8,8 @@ import CheckIn from './Screens/CheckIn';
 import AddGuest from './Screens/AddGuest'
 import AllEvents from './Screens/AllEvents';
 import Dashboard from './Screens/Dashboard';
+import TabNavigation from './Screens/TabNavigation';
+import TabNavigation2 from './Screens/TabNavigation2';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,14 +49,14 @@ export default function App() {
               animationEnabled: false, 
             }}
           />
-          <Stack.Screen 
+          {/* <Stack.Screen 
             name='Guestlist' 
             component={Guestlist}
             options={{
               headerShown: true, 
               animationEnabled: false, 
             }}
-          />
+          /> */}
           <Stack.Screen 
             name='CheckIn' 
             component={CheckIn}
@@ -63,19 +65,35 @@ export default function App() {
               animationEnabled: false, 
             }}
           />
-          <Stack.Screen 
+          {/* <Stack.Screen 
             name='AddGuest' 
             component={AddGuest}
             options={{
               headerShown: true, 
               animationEnabled: false, 
             }}
-          />
-          <Stack.Screen 
+          /> */}
+          {/* <Stack.Screen 
             name='Dashboard' 
             component={Dashboard}
             options={{
               headerShown: true, 
+              animationEnabled: false, 
+            }}
+          /> */}
+          <Stack.Screen 
+            name='TabNavigation' 
+            component={TabNavigation}
+            options={{
+              headerShown: false, 
+              animationEnabled: false, 
+            }}
+          />
+          <Stack.Screen 
+            name='TabNavigation2' 
+            component={TabNavigation2}
+            options={{
+              headerShown: false, 
               animationEnabled: false, 
             }}
           />

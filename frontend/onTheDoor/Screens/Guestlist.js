@@ -91,14 +91,6 @@ const Guestlist = () => {
     navigation.navigate("AddGuest", { userId, eventId });
   };
 
-  const handleNavigateToGuestlist = () => {
-    navigation.navigate("Guestlist", { userId, eventId })
-  }
-
-  const handleNavigateToDashboard = () => {
-    navigation.navigate("Dashboard", { event })
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.eventName}>{eventName}</Text>
@@ -113,32 +105,6 @@ const Guestlist = () => {
       <ScrollView>
         <View>{event && renderGuests()}</View>
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        {/* <View>
-          <TouchableOpacity 
-            style={styles.button}
-            onPress={handleNavigateToGuestlist}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/analytics.png')}
-            />
-            <Text>GUESTLIST</Text>
-          </TouchableOpacity>
-        </View> */}
-        <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleNavigateToDashboard}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/contact-list.png')}
-            />
-            <Text>DASHBOARD</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     </SafeAreaView>
   );
 };
