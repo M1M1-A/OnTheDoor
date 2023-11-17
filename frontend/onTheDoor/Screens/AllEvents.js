@@ -45,7 +45,7 @@ const AllEvents = () => {
   }, [userId, navigation]);
 
   handlePress = (event) => {
-    navigation.navigate("TabNavigation2", { eventId: event.eventId, userId, eventName: event.eventName  })
+    navigation.navigate("TabNavigation2", { eventId: event.eventId, userId })
   }
   
   handleNavigation = () => {

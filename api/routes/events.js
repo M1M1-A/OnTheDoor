@@ -8,6 +8,7 @@ const EventsController = require("../controllers/events");
 router.post("/new-event", upload.single("file"), EventsController.Create);
 router.get("/get-event", EventsController.GetEvent)
 router.get("/get-all-events", EventsController.GetAllEvents)
+router.get("/get-data", EventsController.GetEventData)
 
 module.exports = router;
 

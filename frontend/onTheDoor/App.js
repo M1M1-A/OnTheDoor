@@ -1,13 +1,8 @@
-import SignUp from './Screens/SignUp'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignUp from './Screens/SignUp'
 import LogIn from './Screens/LogIn';
-import NewEvent from './Screens/NewEvent';
-import Guestlist from './Screens/Guestlist';
 import CheckIn from './Screens/CheckIn';
-import AddGuest from './Screens/AddGuest'
-import AllEvents from './Screens/AllEvents';
-import Dashboard from './Screens/Dashboard';
 import TabNavigation from './Screens/TabNavigation';
 import TabNavigation2 from './Screens/TabNavigation2';
 
@@ -34,30 +29,6 @@ export default function App() {
             }}
           />
           <Stack.Screen 
-            name='AllEvents' 
-            component={AllEvents}
-            options={{
-              headerShown: true, 
-              animationEnabled: false, 
-            }}
-          />
-          <Stack.Screen 
-            name='NewEvent' 
-            component={NewEvent}
-            options={{
-              headerShown: true, 
-              animationEnabled: false, 
-            }}
-          />
-          {/* <Stack.Screen 
-            name='Guestlist' 
-            component={Guestlist}
-            options={{
-              headerShown: true, 
-              animationEnabled: false, 
-            }}
-          /> */}
-          <Stack.Screen 
             name='CheckIn' 
             component={CheckIn}
             options={{
@@ -65,22 +36,6 @@ export default function App() {
               animationEnabled: false, 
             }}
           />
-          {/* <Stack.Screen 
-            name='AddGuest' 
-            component={AddGuest}
-            options={{
-              headerShown: true, 
-              animationEnabled: false, 
-            }}
-          /> */}
-          {/* <Stack.Screen 
-            name='Dashboard' 
-            component={Dashboard}
-            options={{
-              headerShown: true, 
-              animationEnabled: false, 
-            }}
-          /> */}
           <Stack.Screen 
             name='TabNavigation' 
             component={TabNavigation}

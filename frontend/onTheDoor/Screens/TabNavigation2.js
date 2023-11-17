@@ -1,5 +1,4 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useRoute } from "@react-navigation/native";
 import Guestlist from "./Guestlist";
@@ -10,7 +9,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation2 = () => {
   const route = useRoute();
-  const { userId, eventId, eventName } = route.params
+  const { userId, eventId } = route.params
 
   return (
       <Tab.Navigator initialRouteName='Guestlist'>
@@ -35,6 +34,7 @@ const TabNavigation2 = () => {
         <Tab.Screen 
           name='Dashboard' 
           component={Dashboard}
+          initialParams={{ userId, eventId }} 
           options={{
             headerShown: false, 
             animationEnabled: false, 

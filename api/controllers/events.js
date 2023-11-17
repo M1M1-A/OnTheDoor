@@ -93,6 +93,49 @@ const EventsController = {
       res.status(500).json({ error: "Error retrieving events" });
     }
   },  
+  GetEventData: async (req, res) => {
+    try {
+      const { eventId, userId } = req.query;
+      const userObjectId = ObjectId(userId);
+      const eventObjectId = ObjectId(eventId);
+      const event = await Events.findOne({
+        user: userObjectId,
+        _id: eventObjectId,
+      });
+
+      if (!event) {
+        res.status(404).json({ message: "Event not found" });
+      } else {
+        const arrivedCount = event.guests.filter(guest => guest.arrived === true).length;
+        const yetToArriveCount = event.guests.filter(guest => guest.arrived !== true).length;
+        const prePaidSales = event.guests.reduce(
+          (count, guest) => count + (guest.paidStatus === "Pre-Paid" ? parseFloat(guest.pricePaid) : 0),
+          0
+        );
+        const salesOnDoor = event.guests.reduce(
+          (count, guest) => count + (guest.paidStatus === "Paid on door" ? parseFloat(guest.pricePaid) : 0),
+          0
+        );
+
+        const arrivedSeries = [arrivedCount, yetToArriveCount]
+        const salesSeries = [prePaidSales, salesOnDoor]
+        const totalSales = prePaidSales + salesOnDoor
+
+        res.status(200).json({
+          arrivedCount,
+          yetToArriveCount,
+          prePaidSales,
+          salesOnDoor,
+          arrivedSeries,
+          salesSeries,
+          totalSales
+        });
+      }
+    } catch (error) {
+      console.log("Error retrieving event data", error);
+      res.status(500).json({ error: "Error retrieving event data" });
+    }
+  },
 };
 
 module.exports = EventsController;

@@ -32,7 +32,7 @@ const Guestlist = () => {
         }
       );
       if (response.ok) {
-        console.log("Event retrieved successfully");
+        console.log("Guestlist event retrieved successfully");
         const data = await response.json();
         setEvent(data.event);
         setEventName(data.event.eventName)
