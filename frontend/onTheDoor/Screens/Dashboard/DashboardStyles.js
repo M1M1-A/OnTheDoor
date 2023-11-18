@@ -4,6 +4,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: '#183D3D',
+    paddingTop: 20,
   },
   title: {
     fontSize: 24,
@@ -20,20 +22,26 @@ const styles = StyleSheet.create({
   arrived: {
     width: 20,
     height: 20,
-    backgroundColor: '#fbd203',
+    backgroundColor: '#93B1A6',
     marginRight: 10,
   },
   yetToArrive: {
     width: 20,
     height: 20,
-    backgroundColor: '#ff9100',
+    backgroundColor: '#e8eded',
     marginRight: 10,
   },
-  text: {
+  heading: {
     marginTop: 10,
     marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white'
+  },
+  text: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: 'white'
   }
 });
 

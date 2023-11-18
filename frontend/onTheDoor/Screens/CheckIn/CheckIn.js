@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, SafeAreaView, View, Button, TouchableOpacity, Image } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import styles from "../Styles/CheckInStyles";
+import styles from "./CheckInStyles";
 import { IP } from "@env";
 
 const CheckIn = () => {
@@ -32,14 +32,14 @@ const CheckIn = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Guest Details</Text>
-      <Text>
+      <Text style={styles.heading}>Guest Details</Text>
+      <Text style={styles.text}>
         Name: {guest.firstName} {guest.lastName}
       </Text>
-      <Text>Email: {guest.email}</Text>
-      <Text>Paid: {guest.paidStatus}</Text>
+      <Text style={styles.text}>Email: {guest.email}</Text>
+      <Text style={styles.text}>Paid: {guest.paidStatus}</Text>
       {checkedIn ? (
-        <Text>Checked In</Text>
+        <Text style={styles.text}>Checked In</Text>
       ) : (
         <Button title="CHECK IN" onPress={handleCheckIn} />
       )}

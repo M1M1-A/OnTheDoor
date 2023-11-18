@@ -5,11 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "mediumspringgreen",
-  },
-  text: {
-    fontSize: 24,
-    marginBottom: 20,
+    backgroundColor: "#183D3D",
   },
   inputFields: {
     margin: 10,
@@ -27,30 +23,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 10,
     padding: 5,
-    height: 40,
-    width: 100,
-    borderWidth: 1,
-    borderRadius: 6,
-    backgroundColor: "dodgerblue",
+    height: 180,
+    width: 180,
+    borderRadius: 100,
+    backgroundColor: "white",
   },
-  buttonText: {
-    color: "white",
-    fontSize: 22,
-  },
-  button2: {
+  uploadButton: {
     justifyContent: "center",
     alignItems: "center",
     margin: 10,
     padding: 5,
-    height: 30,
-    width: 80,
+    height: 40,
+    width: 100,
     borderWidth: 1,
     borderRadius: 6,
-    backgroundColor: "cornflowerblue",
+    backgroundColor: "white",
   },
-  button2Text: {
+  buttonText: {
+    color: "#183D3D",
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "500",
+  },
+  uploadContainer: {
+    flex: 0.5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 22,
     color: "white",
-    fontSize: 18,
+    fontWeight: "600",
   },
 });
 

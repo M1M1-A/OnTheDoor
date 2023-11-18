@@ -6,17 +6,15 @@ import {
   Pressable,
   View,
   ScrollView,
-  Button,
   TouchableOpacity,
-  Image
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import styles from "../Styles/GuestlistStyles";
+import styles from "./GuestlistStyles";
 import { IP } from "@env";
 
 const Guestlist = () => {
   const [event, setEvent] = useState(null);
-  const [eventName, setEventName] = useState("")
+  const [eventName, setEventName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const navigation = useNavigation();
@@ -35,7 +33,7 @@ const Guestlist = () => {
         console.log("Guestlist event retrieved successfully");
         const data = await response.json();
         setEvent(data.event);
-        setEventName(data.event.eventName)
+        setEventName(data.event.eventName);
       } else {
         console.log("No event retrieved");
       }
@@ -75,7 +73,7 @@ const Guestlist = () => {
           style={styles.guest}
           onPress={() => handlePress(guest)}
         >
-          <Text>{`${guest.firstName} ${guest.lastName}`}</Text>
+          <Text style={styles.guestName}>{`${guest.firstName} ${guest.lastName}`}</Text>
         </Pressable>
       ));
     } else {
@@ -87,15 +85,20 @@ const Guestlist = () => {
     navigation.navigate("CheckIn", { guest, userId, eventId });
   };
 
-  const handleAddGuest = () => {
-    navigation.navigate("AddGuest", { userId, eventId });
+  const backToAllEvents = () => {
+    navigation.navigate("TabNavigation", { userId, eventId });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.eventName}>{eventName}</Text>
       <Text style={styles.guestlist}>Guestlist</Text>
-      <Button title="+" onPress={handleAddGuest} />
+      <TouchableOpacity
+        onPress={backToAllEvents}
+        style={styles.backButton}
+      >
+        <Text style={styles.backButtonText}>Back to All Events</Text>
+      </TouchableOpacity>
       <TextInput
         style={styles.searchBar}
         placeholder="Search by name"

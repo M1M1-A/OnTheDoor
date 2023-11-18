@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, SafeAreaView, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import styles from "../Styles/SignUpStyles";
+import styles from "../SignUp/SignUpStyles";
 import { IP } from "@env";
 
 const LogIn = () => {
