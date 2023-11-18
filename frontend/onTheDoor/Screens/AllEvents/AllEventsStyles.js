@@ -15,6 +15,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#183D3D",
   },
+  searchBar: {
+    height: 40,
+    width: 200,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 10,
+    padding: 10,
+    backgroundColor: "white",
+    textAlign: "center",
+  },
   event: {
     width: 400,
     height: 40,
