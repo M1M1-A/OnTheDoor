@@ -64,7 +64,7 @@ const Guestlist = () => {
 
   const renderGuests = () => {
     const guestsToRender =
-      searchResults.length > 0 ? searchResults : event.guests;
+      searchTerm.length > 0 ? searchResults : event.guests;
 
     if (guestsToRender && guestsToRender.length > 0) {
       return guestsToRender.map((guest) => (
@@ -101,7 +101,7 @@ const Guestlist = () => {
       </TouchableOpacity>
       <TextInput
         style={styles.searchBar}
-        placeholder="Search by name"
+        placeholder="Search by guest name"
         value={searchTerm}
         onChangeText={(text) => setSearchTerm(text)}
       />

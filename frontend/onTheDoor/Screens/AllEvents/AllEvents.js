@@ -5,7 +5,7 @@ import {
   Pressable,
   View,
   ScrollView,
-  TouchableOpacity,
+  TextInput,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +14,8 @@ import { IP } from "@env";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [ searchTerm, setSearchTerm] = useState('')
   const navigation = useNavigation();
   const route = useRoute();
   const { userId } = route.params;
@@ -41,8 +43,17 @@ const AllEvents = () => {
       }
     });
 
+    if (events && searchTerm) {
+      const searchResults = events.filter((event) =>
+        event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredEvents(searchResults);
+    } 
+
     return unsubscribe;
-  }, [userId, navigation]);
+  }, [userId, navigation, searchTerm]);
+  
+  const eventsToRender = searchTerm.length > 0 ? filteredEvents : events;
 
   handlePress = (event) => {
     navigation.navigate("TabNavigation2", { eventId: event.eventId, userId });
@@ -55,16 +66,14 @@ const AllEvents = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.allEvents}>All Events</Text>
-      {/* <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          onPress={handleNavigation}
-          style={styles.button}
-          >
-          <Text style={styles.buttonText}>CREATE NEW EVENT</Text>
-        </TouchableOpacity>
-      </View> */}
+      <TextInput
+        style={styles.searchBar}
+        placeholder="Search events by name..."
+        value={searchTerm}
+        onChangeText={(text) => setSearchTerm(text)}
+      />
       <ScrollView>
-        {events.map((event) => (
+        { eventsToRender.map((event) => (
           <Pressable
             key={event.eventId}
             style={styles.event}
