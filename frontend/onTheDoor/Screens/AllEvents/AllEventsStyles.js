@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
+  logo: {
+    width: 200,
+    height: 50,
+    margin: 10
+  },
   container: {
     flex: 1,
     justifyContent: "center",
