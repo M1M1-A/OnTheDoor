@@ -5,7 +5,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "mediumspringgreen",
+    backgroundColor: "#183D3D",
+  },
+  text: {
+    fontSize: 24,
+    marginBottom: 20,
   },
   inputFields: {
     margin: 10,
@@ -23,16 +27,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 10,
     padding: 5,
-    height: 200,
-    width: 200,
-    borderRadius: 100,
-    backgroundColor: "dodgerblue",
-  },
-  uploadButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10,
-    padding: 5,
     height: 40,
     width: 100,
     borderWidth: 1,
@@ -41,16 +35,21 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
-    textAlign: "center",
+    fontSize: 22,
   },
-  uploadContainer: {
-    flex: 0.5,
+  button2: {
     justifyContent: "center",
     alignItems: "center",
+    margin: 10,
+    padding: 5,
+    height: 30,
+    width: 80,
+    borderWidth: 1,
+    borderRadius: 6,
+    backgroundColor: "cornflowerblue",
   },
-  text: {
-    textAlign: "center",
+  button2Text: {
+    color: "white",
     fontSize: 18,
   },
 });

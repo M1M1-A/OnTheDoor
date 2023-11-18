@@ -6,17 +6,15 @@ import {
   Pressable,
   View,
   ScrollView,
-  Button,
   TouchableOpacity,
-  Image
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import styles from "../Styles/GuestlistStyles";
+import styles from "./GuestlistStyles";
 import { IP } from "@env";
 
 const Guestlist = () => {
   const [event, setEvent] = useState(null);
-  const [eventName, setEventName] = useState("")
+  const [eventName, setEventName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const navigation = useNavigation();
@@ -32,10 +30,10 @@ const Guestlist = () => {
         }
       );
       if (response.ok) {
-        console.log("Event retrieved successfully");
+        console.log("Guestlist event retrieved successfully");
         const data = await response.json();
         setEvent(data.event);
-        setEventName(data.event.eventName)
+        setEventName(data.event.eventName);
       } else {
         console.log("No event retrieved");
       }
@@ -75,7 +73,7 @@ const Guestlist = () => {
           style={styles.guest}
           onPress={() => handlePress(guest)}
         >
-          <Text>{`${guest.firstName} ${guest.lastName}`}</Text>
+          <Text style={styles.guestName}>{`${guest.firstName} ${guest.lastName}`}</Text>
         </Pressable>
       ));
     } else {
@@ -87,23 +85,20 @@ const Guestlist = () => {
     navigation.navigate("CheckIn", { guest, userId, eventId });
   };
 
-  const handleAddGuest = () => {
-    navigation.navigate("AddGuest", { userId, eventId });
+  const backToAllEvents = () => {
+    navigation.navigate("TabNavigation", { userId, eventId });
   };
-
-  const handleNavigateToGuestlist = () => {
-    navigation.navigate("Guestlist", { userId, eventId })
-  }
-
-  const handleNavigateToDashboard = () => {
-    navigation.navigate("Dashboard", { event })
-  }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.eventName}>{eventName}</Text>
       <Text style={styles.guestlist}>Guestlist</Text>
-      <Button title="+" onPress={handleAddGuest} />
+      <TouchableOpacity
+        onPress={backToAllEvents}
+        style={styles.backButton}
+      >
+        <Text style={styles.backButtonText}>Back to All Events</Text>
+      </TouchableOpacity>
       <TextInput
         style={styles.searchBar}
         placeholder="Search by name"
@@ -113,32 +108,6 @@ const Guestlist = () => {
       <ScrollView>
         <View>{event && renderGuests()}</View>
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        {/* <View>
-          <TouchableOpacity 
-            style={styles.button}
-            onPress={handleNavigateToGuestlist}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/analytics.png')}
-            />
-            <Text>GUESTLIST</Text>
-          </TouchableOpacity>
-        </View> */}
-        <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={handleNavigateToDashboard}
-          >
-            <Image
-              style={styles.image}
-              source={require('../assets/contact-list.png')}
-            />
-            <Text>DASHBOARD</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     </SafeAreaView>
   );
 };

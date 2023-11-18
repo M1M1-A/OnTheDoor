@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, SafeAreaView, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import styles from "../Styles/SignUpStyles";
+import styles from "../SignUp/SignUpStyles";
 import { IP } from "@env";
 
 const LogIn = () => {
@@ -38,7 +38,7 @@ const LogIn = () => {
       let data = await response.json();
       await AsyncStorage.setItem("token", data.token);
       await AsyncStorage.setItem("userId", data.userId);
-      navigation.navigate("AllEvents", { userId: data.userId });
+      navigation.navigate("TabNavigation", { userId: data.userId });
     }
   };
 

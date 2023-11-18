@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.11",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "react-native-dotenv": "^3.4.9",

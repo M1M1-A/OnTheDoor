@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, SafeAreaView, TextInput, Pressable, View } from "react-native";
 import * as DocumentPicker from "expo-document-picker";
-import styles from "../Styles/NewEventStyles";
+import styles from "./NewEventStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useRoute } from "@react-navigation/native";
 const FormData = require("form-data");
@@ -10,7 +10,6 @@ import { IP } from "@env";
 const NewEvent = () => {
   const [file, setFile] = useState(null);
   const [eventName, setEventName] = useState("");
-  // const [eventId, setEventId] = useState("");
   const navigation = useNavigation();
   const route = useRoute();
   const { userId } = route.params;
@@ -57,11 +56,12 @@ const NewEvent = () => {
         });
 
         if (response.ok) {
-          console.log("Upload successful");         
+          console.log("Upload successful");
           const data = await response.json();
-          const eventId = data.eventId
-          navigation.navigate("Guestlist", { eventName, userId, eventId });
-
+          const eventId = data.eventId;
+          navigation.navigate("TabNavigation2", { userId, eventId });
+          setFile(null);
+          // setEventName(null)
         } else {
           console.log("Upload failed");
           console.log("Response", response.message);
