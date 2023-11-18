@@ -28,12 +28,17 @@ const styles = StyleSheet.create({
   },
   event: {
     width: 400,
-    height: 40,
+    height: 45,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
     borderWidth: 0.5,
     borderRadius: 6,
+  },
+  eventName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#183D3D",
   },
   buttonContainer: {
     alignSelf: "flex-end",

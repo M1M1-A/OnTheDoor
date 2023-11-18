@@ -79,7 +79,7 @@ const AllEvents = () => {
             style={styles.event}
             onPress={() => handlePress(event)}
           >
-            <Text>{event.eventName}</Text>
+            <Text style={styles.eventName}>{event.eventName}</Text>
           </Pressable>
         ))}
       </ScrollView>

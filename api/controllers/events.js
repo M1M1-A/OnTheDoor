@@ -24,14 +24,17 @@ const EventsController = {
               "First Name": firstName,
               "Last Name": lastName,
               "Email": email,
-              "Total Paid": totalPaid,
+              "Ticket Price": totalPaid,
             } = row;
+
+            const numericTotalPaid = typeof totalPaid === 'number' ? totalPaid : parseFloat(totalPaid.replace(/[^\d.-]/g, ''));
+
             const newGuest = {
               firstName,
               lastName,
               email,
               paidStatus: "Pre-Paid",
-              pricePaid: totalPaid,
+              pricePaid: numericTotalPaid,
               arrived: false,
             };
             guests.push(newGuest);

@@ -96,16 +96,17 @@ const Dashboard = () => {
       <View style={styles.labelsContainer}>
         <View style={styles.arrived} />
         <Text style={styles.text}>
-          Pre Paid Sales: {prePaidSales.toFixed(2)}
+          Pre Paid Sales: £{prePaidSales.toFixed(2)}
         </Text>
       </View>
       <View style={styles.labelsContainer}>
         <View style={styles.yetToArrive} />
-        <Text style={styles.text}>Sales On Door: {salesOnDoor.toFixed(2)}</Text>
+        <Text style={styles.text}>Sales On Door: £{salesOnDoor.toFixed(2)}</Text>
       </View>
-      <Text style={styles.text}>Total Sales: {totalSales.toFixed(2)}</Text>
+      <Text style={styles.text}>Total Sales: £{totalSales.toFixed(2)}</Text>
     </SafeAreaView>
   );
+
 };
 
 export default Dashboard;

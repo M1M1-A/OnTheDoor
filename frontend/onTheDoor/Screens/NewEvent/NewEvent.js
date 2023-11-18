@@ -61,7 +61,7 @@ const NewEvent = () => {
           const eventId = data.eventId;
           navigation.navigate("TabNavigation2", { userId, eventId });
           setFile(null);
-          // setEventName(null)
+          setEventName("")
         } else {
           console.log("Upload failed");
           console.log("Response", response.message);
