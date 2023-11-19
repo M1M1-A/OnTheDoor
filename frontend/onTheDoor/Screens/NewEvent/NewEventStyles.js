@@ -7,6 +7,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#183D3D",
   },
+  heading: {
+    textAlign: "center",
+    fontSize: 32,
+    color: "khaki",
+    fontWeight: "bold",
+    marginBottom: 20
+  },
   inputFields: {
     margin: 10,
     padding: 5,
@@ -14,7 +21,7 @@ const styles = StyleSheet.create({
     width: 200,
     borderWidth: 1,
     borderRadius: 6,
-    fontSize: 22,
+    fontSize: 18,
     textAlign: "center",
     backgroundColor: "#fff",
   },
@@ -37,7 +44,7 @@ const styles = StyleSheet.create({
     width: 100,
     borderWidth: 1,
     borderRadius: 6,
-    backgroundColor: "white",
+    backgroundColor: "khaki",
   },
   buttonText: {
     color: "#183D3D",

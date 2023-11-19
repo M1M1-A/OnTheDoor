@@ -97,7 +97,7 @@ const Guestlist = () => {
         onPress={backToAllEvents}
         style={styles.backButton}
       >
-        <Text style={styles.backButtonText}>Back to All Events</Text>
+        <Text style={styles.backButtonText}>👈 All Events</Text>
       </TouchableOpacity>
       <TextInput
         style={styles.searchBar}

@@ -76,9 +76,9 @@ const NewEvent = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Name of event</Text>
+      <Text style={styles.heading}>ADD NEW EVENT</Text>
       <TextInput
-        placeholder="Event Name"
+        placeholder="Enter your Event Name"
         style={styles.inputFields}
         onChangeText={handleEventInput}
       />

@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#183D3D",
+    // fontFamily: 'BebasNeue-Regular'
   },
   logo: {
     width: 300,
@@ -13,10 +14,10 @@ const styles = StyleSheet.create({
     margin: 10
   },
   text: {
-    fontSize: 24,
+    fontSize: 30,
     marginBottom: 20,
-    color: 'white',
-    fontWeight: '600'
+    color: 'khaki',
+    fontWeight: 'bold'
   },
   signUpText: {
     color: 'white',
@@ -44,26 +45,28 @@ const styles = StyleSheet.create({
     width: 100,
     borderWidth: 1,
     borderRadius: 6,
-    backgroundColor: "dodgerblue",
+    backgroundColor: "khaki",
   },
   buttonText: {
-    color: "white",
-    fontSize: 22,
+    color: "#183D3D",
+    fontSize: 20,
+    fontWeight: '600'
   },
   button2: {
     justifyContent: "center",
     alignItems: "center",
     margin: 10,
     padding: 5,
-    height: 30,
-    width: 80,
+    height: 40,
+    width: 100,
     borderWidth: 1,
     borderRadius: 6,
-    backgroundColor: "cornflowerblue",
+    backgroundColor: "#fcfbf0",
   },
   button2Text: {
-    color: "white",
+    color: "#183D3D",
     fontSize: 18,
+    fontWeight: '600'
   },
 });
 

@@ -59,7 +59,7 @@ const Dashboard = () => {
   const yetToArrivePercentage = (yetToArriveCount / totalGuests) * 100;
 
   const widthAndHeight = 230;
-  const sliceColor = ["#93B1A6", "#e8eded"];
+  const sliceColor = ["khaki", "#fcfbf0"];
 
   return (
     <SafeAreaView style={styles.container}>

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: "center",
     fontSize: 40,
-    color: "white",
+    color: "khaki",
     fontWeight: "bold",
   },
   guestlist: {
@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#183D3D",
   },
   guest: {
-    width: 400,
+    width: 390,
     height: 45,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
     borderWidth: 0.5,
-    borderRadius: 6,
+    borderRadius: 5,
   },
   guestName: {
     fontSize: 16,

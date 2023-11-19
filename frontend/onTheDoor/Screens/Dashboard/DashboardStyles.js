@@ -22,26 +22,28 @@ const styles = StyleSheet.create({
   arrived: {
     width: 20,
     height: 20,
-    backgroundColor: '#93B1A6',
+    backgroundColor: 'khaki',
     marginRight: 10,
+    borderRadius: 5
   },
   yetToArrive: {
     width: 20,
     height: 20,
-    backgroundColor: '#e8eded',
+    backgroundColor: '#fcfbf0',
     marginRight: 10,
+    borderRadius: 5
   },
   heading: {
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 10,
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white'
+    fontSize: 24,
+    fontWeight: '700',
+    color: 'khaki',
   },
   text: {
     fontSize: 14,
     fontWeight: '500',
-    color: 'white'
+    color: 'white',
   }
 });
 
