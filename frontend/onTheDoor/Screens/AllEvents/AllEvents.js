@@ -38,7 +38,6 @@ const AllEvents = () => {
     }
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       const tokenExpired = await checkIfTokenExpired();

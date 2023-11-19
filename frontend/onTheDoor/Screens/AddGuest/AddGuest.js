@@ -3,6 +3,7 @@ import { Text, SafeAreaView, TextInput, TouchableOpacity } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { IP } from "@env";
 import styles from "./AddGuestStyles"; 
+import checkIfTokenExpired from "../../checkTokenExpiry";
 
 const AddGuest = () => {
   const [firstName, setFirstName] = useState("");
@@ -32,23 +33,30 @@ const AddGuest = () => {
 
   const handleAddGuest = async () => {
     try {
-      const response = await fetch(`${IP}/guests/add-guest`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          pricePaid,
-          eventId,
-        }),
-      });
+      const tokenExpired = await checkIfTokenExpired()
+      
+      if (!tokenExpired) {
+        const response = await fetch(`${IP}/guests/add-guest`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            pricePaid,
+            eventId,
+          }),
+        });
 
-      if (response.ok) {
-        console.log("Guest added and checked in");
-        navigation.navigate("Guestlist", { eventId, userId });
+        if (response.ok) {
+          console.log("Guest added and checked in");
+          navigation.navigate("Guestlist", { eventId, userId });
+        }
+      } else {
+        alert("Session expired. Please log in again")
+        navigation.navigate("LogIn")
       }
     } catch (error) {
       console.log("Error adding Guest", error);
