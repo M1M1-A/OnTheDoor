@@ -13,7 +13,6 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./AllEventsStyles";
 import checkIfTokenExpired from "../../checkTokenExpiry";
 import { IP } from "@env";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -39,12 +38,21 @@ const AllEvents = () => {
     }
   };
 
+
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      if (userId) {
-        getAllEvents();
+    const fetchData = async () => {
+      const tokenExpired = await checkIfTokenExpired();
+
+      if (!tokenExpired) {
+        await getAllEvents();
+      } else {
+        alert("Session expired. Please log in again")
+        navigation.navigate("LogIn")
       }
-    });
+    };
+    fetchData();
+
+    const unsubscribe = navigation.addListener("focus", fetchData);
 
     if (events && searchTerm) {
       const searchResults = events.filter((event) =>
