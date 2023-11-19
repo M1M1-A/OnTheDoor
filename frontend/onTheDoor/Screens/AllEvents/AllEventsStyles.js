@@ -10,13 +10,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   logo: {
-    width: 200,
-    height: 50,
+    width: 180,
+    height: 45,
     margin: 10
+  },
+  logoContainer: {
+    flex: 1,
+    // alignSelf: 'flex-start'
   },
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#183D3D",
   },

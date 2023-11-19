@@ -47,20 +47,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#183D3D",
   },
-  buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-    backgroundColor: "white",
-  },
-  button: {
-    alignItems: "center",
-    width: 200,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-  },
   image: {
     width: 40,
     height: 40,

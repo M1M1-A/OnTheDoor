@@ -11,6 +11,7 @@ import {
 import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./AllEventsStyles";
+import checkIfTokenExpired from "../../checkTokenExpiry";
 import { IP } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -40,8 +41,7 @@ const AllEvents = () => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      const token = AsyncStorage.getItem('token')
-      if (token) {
+      if (userId) {
         getAllEvents();
       }
     });
@@ -68,11 +68,11 @@ const AllEvents = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-      <Image 
-        source={require("../../assets/OnTheDoor-logos-white.png")}
-        style={styles.logo}
-      />
+      <View style={styles.logoContainer}>
+        <Image 
+          source={require("../../assets/OnTheDoor-logos-white.png")}
+          style={styles.logo}
+        />
       </View>
       <Text style={styles.allEvents}>All Events</Text>
       <TextInput
@@ -82,15 +82,17 @@ const AllEvents = () => {
         onChangeText={(text) => setSearchTerm(text)}
       />
       <ScrollView>
-        { eventsToRender.map((event) => (
-          <Pressable
-            key={event.eventId}
-            style={styles.event}
-            onPress={() => handlePress(event)}
-          >
-            <Text style={styles.eventName}>{event.eventName}</Text>
-          </Pressable>
-        ))}
+        <View>
+          { eventsToRender.map((event) => (
+            <Pressable
+              key={event.eventId}
+              style={styles.event}
+              onPress={() => handlePress(event)}
+            >
+              <Text style={styles.eventName}>{event.eventName}</Text>
+            </Pressable>
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
