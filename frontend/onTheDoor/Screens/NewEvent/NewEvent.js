@@ -13,7 +13,7 @@ const NewEvent = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { userId } = route.params;
-
+  
   const handleEventInput = (text) => {
     setEventName(text);
   };
@@ -31,6 +31,8 @@ const NewEvent = () => {
   };
 
   const handleFileUpload = async () => {
+
+
     if (file) {
       try {
         const formData = new FormData();
@@ -80,6 +82,7 @@ const NewEvent = () => {
       <TextInput
         placeholder="Enter your Event Name"
         style={styles.inputFields}
+        value={eventName}
         onChangeText={handleEventInput}
       />
       <View style={styles.uploadContainer}>

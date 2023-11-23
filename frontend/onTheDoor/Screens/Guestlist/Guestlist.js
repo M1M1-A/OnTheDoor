@@ -11,6 +11,7 @@ import {
 import { useRoute, useNavigation } from "@react-navigation/native";
 import styles from "./GuestlistStyles";
 import { IP } from "@env";
+import checkTokenExpiry from "../../CheckTokenExpiry";
 
 const Guestlist = () => {
   const [event, setEvent] = useState(null);
@@ -43,11 +44,21 @@ const Guestlist = () => {
   };
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      if (userId) {
-        getEvent();
+    const checkToken = async () => {
+      const tokenExpired = await checkTokenExpiry()
+
+      if (!tokenExpired) {
+        await getEvent()
+      } 
+      else {
+        alert("Session expired. Please log in again")
+        navigation.navigate("LogIn")      
       }
-    });
+    }
+
+    checkToken();
+
+    const unsubscribe = navigation.addListener("focus", checkToken);
 
     if (event && event.guests) {
       const searchResults = event.guests.filter((guest) =>
@@ -60,7 +71,7 @@ const Guestlist = () => {
     }
 
     return unsubscribe;
-  }, [navigation, userId, searchTerm, event]);
+  }, [navigation, userId, searchTerm]);
 
   const renderGuests = () => {
     const guestsToRender =

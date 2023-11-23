@@ -48,6 +48,10 @@ const AddGuest = () => {
 
       if (response.ok) {
         console.log("Guest added and checked in");
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+        setPricePaid('')
         navigation.navigate("Guestlist", { eventId, userId });
       }
     } catch (error) {
@@ -61,21 +65,25 @@ const AddGuest = () => {
       <TextInput
         style={styles.inputFields}
         placeholder="First Name"
+        value={firstName}
         onChangeText={handleFirstNameInput}
       />
       <TextInput
         style={styles.inputFields}
         placeholder="Last Name"
+        value={lastName}
         onChangeText={handleLastNameInput}
       />
       <TextInput
         style={styles.inputFields}
         placeholder="Email"
+        value={email}
         onChangeText={handleEmailInput}
       />
       <TextInput
         style={styles.inputFields}
         placeholder="Amount Paid"
+        value={pricePaid}
         onChangeText={handlePricePaidInput}
       />
       <TouchableOpacity
