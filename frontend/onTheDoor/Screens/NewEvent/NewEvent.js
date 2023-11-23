@@ -76,20 +76,21 @@ const NewEvent = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Name of event</Text>
+      <Text style={styles.heading}>ADD NEW EVENT</Text>
       <TextInput
-        placeholder="Event Name"
+        placeholder="Enter your Event Name"
         style={styles.inputFields}
         onChangeText={handleEventInput}
       />
       <View style={styles.uploadContainer}>
-        <Text style={styles.text}>Upload CSV file</Text>
+        <Text style={styles.uploadCsvText}>Upload CSV file</Text>
         <Pressable style={styles.button} onPress={handleFileSelection}>
           <Text style={styles.buttonText}>Select CSV File</Text>
         </Pressable>
         {file && (
-          <View>
-            <Text style={styles.text}>Selected File: {file.name}</Text>
+          <View style={styles.fileUploadContainer}>
+            <Text style={styles.text}>Selected File:</Text>
+            <Text style={styles.fileName}>{file.name}</Text>
             <Pressable style={styles.uploadButton} onPress={handleFileUpload}>
               <Text style={styles.buttonText}>Upload</Text>
             </Pressable>

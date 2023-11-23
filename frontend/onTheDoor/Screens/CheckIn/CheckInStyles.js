@@ -14,12 +14,20 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   button: {
+    justifyContent: "center",
     alignItems: "center",
+    margin: 10,
+    padding: 5,
+    height: 40,
     width: 200,
-    padding: 10,
     borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
+    borderRadius: 6,
+    backgroundColor: "khaki",
+    marginTop: 20
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: '600'
   },
   image: {
     width: 40,
@@ -27,15 +35,28 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   heading: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "600",
+    fontSize: 30,
+    marginBottom: 20,
+    color: 'khaki',
+    fontWeight: 'bold'
+  },
+  guestDetails: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    margin: 20,
   },
   text: {
     color: "white",
     fontSize: 20,
     fontWeight: "400",
+    margin: 10,
+    fontSize: 22
   },
+  checkedIn: {
+    fontSize: 25,
+    fontWeight: '600',
+    color: 'khaki'
+  }
 });
 
 export default styles;

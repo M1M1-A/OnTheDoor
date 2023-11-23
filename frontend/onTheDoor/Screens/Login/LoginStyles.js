@@ -6,18 +6,30 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#183D3D",
+    // fontFamily: 'BebasNeue-Regular'
   },
-  heading: {
+  logo: {
+    width: 300,
+    height: 80,
+    margin: 10
+  },
+  text: {
     fontSize: 30,
     marginBottom: 20,
     color: 'khaki',
     fontWeight: 'bold'
   },
+  signUpText: {
+    color: 'white',
+    fontWeight: 400,
+    fontSize: 18,
+    padding: 10
+  },
   inputFields: {
     margin: 10,
     padding: 5,
     height: 50,
-    width: 260,
+    width: 300,
     borderWidth: 1,
     borderRadius: 6,
     fontSize: 22,
@@ -30,34 +42,31 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 5,
     height: 40,
-    width: 200,
+    width: 100,
     borderWidth: 1,
     borderRadius: 6,
     backgroundColor: "khaki",
-    marginTop: 20
   },
   buttonText: {
+    color: "#183D3D",
     fontSize: 20,
     fontWeight: '600'
   },
-  buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-    backgroundColor: "white",
-  },
   button2: {
+    justifyContent: "center",
     alignItems: "center",
-    width: 200,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 5,
-  },
-  image: {
-    width: 40,
+    margin: 10,
+    padding: 5,
     height: 40,
-    marginBottom: 15,
+    width: 100,
+    borderWidth: 1,
+    borderRadius: 6,
+    backgroundColor: "#fcfbf0",
+  },
+  button2Text: {
+    color: "#183D3D",
+    fontSize: 18,
+    fontWeight: '600'
   },
 });
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Text, SafeAreaView, TextInput, TouchableOpacity } from "react-native";
+import { Text, SafeAreaView, TextInput, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import styles from "../SignUp/SignUpStyles";
+import styles from "../Login/LoginStyles";
 import { IP } from "@env";
 
 const LogIn = () => {
@@ -48,6 +48,10 @@ const LogIn = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Image 
+        source={require("../../assets/OnTheDoor-logos-white.png")}
+        style={styles.logo}
+      />
       <Text style={styles.text}>LOG IN</Text>
       <TextInput
         style={styles.inputFields}
@@ -73,7 +77,7 @@ const LogIn = () => {
           SUBMIT
         </Text>
       </TouchableOpacity>
-      <Text>Not yet with us? Sign Up instead</Text>
+      <Text style={styles.signUpText}>Not yet with us? Sign Up instead</Text>
       <TouchableOpacity
         style={styles.button2}
         accessibilityLabel="Submit button"

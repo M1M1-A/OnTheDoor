@@ -5,13 +5,13 @@ import LogIn from './Screens/Login/LogIn';
 import CheckIn from './Screens/CheckIn/CheckIn';
 import TabNavigation from './Screens/Navigation/TabNavigation';
 import TabNavigation2 from './Screens/Navigation/TabNavigation2';
-
+import styles from './AppStyles'
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <>
-      <NavigationContainer>   
+      <NavigationContainer style={styles.app}>   
         <Stack.Navigator initialRouteName='LogIn'>
           <Stack.Screen 
             name='SignUp' 

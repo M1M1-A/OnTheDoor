@@ -5,9 +5,14 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
     textAlign: "center",
-    fontSize: 30,
-    color: "white",
+    fontSize: 40,
+    color: "khaki",
     fontWeight: "bold",
+  },
+  logo: {
+    width: 200,
+    height: 50,
+    margin: 10,
   },
   container: {
     flex: 1,
@@ -27,13 +32,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   event: {
-    width: 400,
+    width: 390,
     height: 45,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
     borderWidth: 0.5,
-    borderRadius: 6,
+    borderRadius: 5,
   },
   eventName: {
     fontSize: 16,
