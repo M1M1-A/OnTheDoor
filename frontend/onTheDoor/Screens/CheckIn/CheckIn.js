@@ -33,15 +33,23 @@ const CheckIn = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Guest Details</Text>
-      <Text style={styles.text}>
-        Name: {guest.firstName} {guest.lastName}
-      </Text>
-      <Text style={styles.text}>Email: {guest.email}</Text>
-      <Text style={styles.text}>Paid: {guest.paidStatus}</Text>
+      <View style={styles.guestDetails}>
+        <Text style={styles.text}>
+          name//  {guest.firstName} {guest.lastName}
+        </Text>
+        <Text style={styles.text}>email//   {guest.email}</Text>
+        <Text style={styles.text}>paid//    {guest.paidStatus}</Text>
+      </View>
       {checkedIn ? (
-        <Text style={styles.text}>Checked In</Text>
+        <Text style={styles.checkedIn}>Checked In </Text>
       ) : (
-        <Button title="CHECK IN" onPress={handleCheckIn} />
+        <TouchableOpacity
+        style={styles.button}
+        accessibilityLabel="Submit button"
+        onPress={handleCheckIn}
+      >
+        <Text style={styles.buttonText}>CHECK IN</Text>
+      </TouchableOpacity>
       )}
     </SafeAreaView>
   );

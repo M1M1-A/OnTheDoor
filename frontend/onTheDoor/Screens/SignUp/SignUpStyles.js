@@ -7,15 +7,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#183D3D",
   },
-  text: {
-    fontSize: 24,
+  logo: {
+    width: 300,
+    height: 80,
+    margin: 10
+  },
+  heading: {
+    fontSize: 30,
     marginBottom: 20,
+    color: 'khaki',
+    fontWeight: 'bold'
   },
   inputFields: {
     margin: 10,
     padding: 5,
     height: 50,
-    width: 200,
+    width: 300,
     borderWidth: 1,
     borderRadius: 6,
     fontSize: 22,
@@ -31,27 +38,35 @@ const styles = StyleSheet.create({
     width: 100,
     borderWidth: 1,
     borderRadius: 6,
-    backgroundColor: "dodgerblue",
+    backgroundColor: "khaki",
   },
   buttonText: {
-    color: "white",
-    fontSize: 22,
+    fontSize: 20,
+    fontWeight: '600'
   },
   button2: {
     justifyContent: "center",
     alignItems: "center",
     margin: 10,
     padding: 5,
-    height: 30,
-    width: 80,
+    height: 40,
+    width: 100,
     borderWidth: 1,
     borderRadius: 6,
-    backgroundColor: "cornflowerblue",
+    backgroundColor: "#fcfbf0",
   },
   button2Text: {
-    color: "white",
+    color: "#183D3D",
     fontSize: 18,
+    fontWeight: '600'
   },
+  text: {
+    color: 'white',
+    fontWeight: 400,
+    fontSize: 18,
+    padding: 10
+
+  }
 });
 
 export default styles;

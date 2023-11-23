@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Image
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./SignUpStyles";
@@ -61,7 +62,11 @@ const SignUp = () => {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>SIGN UP</Text>
+        <Image 
+          source={require("../../assets/OnTheDoor-logos-white.png")}
+          style={styles.logo}
+        />
+        <Text style={styles.heading}>SIGN UP</Text>
         <TextInput
           style={styles.inputFields}
           placeholder="Email"
@@ -87,7 +92,7 @@ const SignUp = () => {
             SUBMIT
           </Text>
         </TouchableOpacity>
-        <Text>Already with us? Log in instead</Text>
+        <Text style={styles.text}>Already with us? Log in instead</Text>
         <TouchableOpacity
           style={styles.button2}
           accessibilityLabel="Submit button"

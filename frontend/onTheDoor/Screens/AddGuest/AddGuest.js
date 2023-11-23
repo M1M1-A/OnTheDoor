@@ -57,6 +57,7 @@ const AddGuest = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.heading}>ADD GUEST</Text>
       <TextInput
         style={styles.inputFields}
         placeholder="First Name"

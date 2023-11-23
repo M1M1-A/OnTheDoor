@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
   },
   labelsContainer: {
     flexDirection: 'row',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    margin: 3
   },
   arrived: {
     width: 20,
@@ -44,6 +45,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: 'white',
+  },
+  totalSalesText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: 'white',
+    fontWeight: 'bold',
+    marginTop: 5
   }
 });
 

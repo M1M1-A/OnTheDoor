@@ -83,13 +83,14 @@ const NewEvent = () => {
         onChangeText={handleEventInput}
       />
       <View style={styles.uploadContainer}>
-        <Text style={styles.text}>Upload CSV file</Text>
+        <Text style={styles.uploadCsvText}>Upload CSV file</Text>
         <Pressable style={styles.button} onPress={handleFileSelection}>
           <Text style={styles.buttonText}>Select CSV File</Text>
         </Pressable>
         {file && (
-          <View>
-            <Text style={styles.text}>Selected File: {file.name}</Text>
+          <View style={styles.fileUploadContainer}>
+            <Text style={styles.text}>Selected File:</Text>
+            <Text style={styles.fileName}>{file.name}</Text>
             <Pressable style={styles.uploadButton} onPress={handleFileUpload}>
               <Text style={styles.buttonText}>Upload</Text>
             </Pressable>

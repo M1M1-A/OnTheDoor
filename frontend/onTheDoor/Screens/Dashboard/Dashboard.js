@@ -58,7 +58,7 @@ const Dashboard = () => {
   const arrivedPercentage = (arrivedCount / totalGuests) * 100;
   const yetToArrivePercentage = (yetToArriveCount / totalGuests) * 100;
 
-  const widthAndHeight = 230;
+  const widthAndHeight = 220;
   const sliceColor = ["khaki", "#fcfbf0"];
 
   return (
@@ -72,6 +72,7 @@ const Dashboard = () => {
         coverFill={"#183D3D"}
         style={styles.pieChart}
       />
+      <View style={styles.labels}>
       <View style={styles.labelsContainer}>
         <View style={styles.arrived} />
         <Text style={styles.text}>
@@ -83,6 +84,7 @@ const Dashboard = () => {
         <Text style={styles.text}>
           Yet to arrive: {yetToArriveCount} ({yetToArrivePercentage.toFixed()}%)
         </Text>
+      </View>
       </View>
       <Text style={styles.heading}>SALES</Text>
       <PieChart
@@ -103,7 +105,7 @@ const Dashboard = () => {
         <View style={styles.yetToArrive} />
         <Text style={styles.text}>Sales On Door: £{salesOnDoor.toFixed(2)}</Text>
       </View>
-      <Text style={styles.text}>Total Sales: £{totalSales.toFixed(2)}</Text>
+      <Text style={styles.totalSalesText}>Total Sales: £{totalSales.toFixed(2)}</Text>
     </SafeAreaView>
   );
 
