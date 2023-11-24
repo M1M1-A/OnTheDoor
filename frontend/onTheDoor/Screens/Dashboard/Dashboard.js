@@ -5,6 +5,7 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import PieChart from "react-native-pie-chart";
 import styles from "./DashboardStyles";
 import { IP } from "@env";
+import checkTokenExpiry from "../../CheckTokenExpiry";
 
 const Dashboard = () => {
   const route = useRoute();
@@ -19,29 +20,36 @@ const Dashboard = () => {
   const [totalSales, setTotalSales] = useState(0);
 
   const getEventData = async () => {
-    try {
-      const response = await fetch(
-        `${IP}/events/get-data?userId=${userId}&eventId=${eventId}`,
-        {
-          method: "GET",
+    const tokenExpired = await checkTokenExpiry();
+
+    if (!tokenExpired) {
+      try {
+        const response = await fetch(
+          `${IP}/events/get-data?userId=${userId}&eventId=${eventId}`,
+          {
+            method: "GET",
+          }
+        );
+        if (response.ok) {
+          console.log("Dashboard data retrieved successfully");
+          const data = await response.json();
+          setArrivedCount(data.arrivedCount);
+          setYetToArriveCount(data.yetToArriveCount);
+          setPrePaidSales(data.prePaidSales);
+          setSalesOnDoor(data.salesOnDoor);
+          setArrivedSeries(data.arrivedSeries);
+          setSalesSeries(data.salesSeries);
+          setTotalSales(data.totalSales);
+        } else {
+          console.log("No data retrieved");
         }
-      );
-      if (response.ok) {
-        console.log("Dashboard data retrieved successfully");
-        const data = await response.json();
-        setArrivedCount(data.arrivedCount);
-        setYetToArriveCount(data.yetToArriveCount);
-        setPrePaidSales(data.prePaidSales);
-        setSalesOnDoor(data.salesOnDoor);
-        setArrivedSeries(data.arrivedSeries);
-        setSalesSeries(data.salesSeries);
-        setTotalSales(data.totalSales);
-      } else {
-        console.log("No data retrieved");
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } else {
+      alert("Session expired. Please log in again")
+      navigation.navigate("LogIn")      
+    }  
   };
 
   useEffect(() => {

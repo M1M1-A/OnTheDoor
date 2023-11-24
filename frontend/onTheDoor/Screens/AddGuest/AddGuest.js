@@ -3,6 +3,7 @@ import { Text, SafeAreaView, TextInput, TouchableOpacity } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { IP } from "@env";
 import styles from "./AddGuestStyles"; 
+import checkTokenExpiry from "../../CheckTokenExpiry";
 
 const AddGuest = () => {
   const [firstName, setFirstName] = useState("");
@@ -31,32 +32,39 @@ const AddGuest = () => {
   };
 
   const handleAddGuest = async () => {
-    try {
-      const response = await fetch(`${IP}/guests/add-guest`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          pricePaid,
-          eventId,
-        }),
-      });
+    const tokenExpired = await checkTokenExpiry();
 
-      if (response.ok) {
-        console.log("Guest added and checked in");
-        setFirstName('')
-        setLastName('')
-        setEmail('')
-        setPricePaid('')
-        navigation.navigate("Guestlist", { eventId, userId });
+    if (!tokenExpired) {
+      try {
+        const response = await fetch(`${IP}/guests/add-guest`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            pricePaid,
+            eventId,
+          }),
+        });
+
+        if (response.ok) {
+          console.log("Guest added and checked in");
+          setFirstName('')
+          setLastName('')
+          setEmail('')
+          setPricePaid('')
+          navigation.navigate("Guestlist", { eventId, userId });
+        }
+      } catch (error) {
+        console.log("Error adding Guest", error);
       }
-    } catch (error) {
-      console.log("Error adding Guest", error);
-    }
+    } else {
+      alert("Session expired. Please log in again")
+      navigation.navigate("LogIn")      
+    }  
   };
 
   return (
