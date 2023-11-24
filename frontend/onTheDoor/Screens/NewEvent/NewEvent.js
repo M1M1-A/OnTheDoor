@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useRoute } from "@react-navigation/native";
 const FormData = require("form-data");
 import { IP } from "@env";
+import checkTokenExpiry from '../../CheckTokenExpiry'
 
 const NewEvent = () => {
   const [file, setFile] = useState(null);
@@ -13,7 +14,7 @@ const NewEvent = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { userId } = route.params;
-
+  
   const handleEventInput = (text) => {
     setEventName(text);
   };
@@ -31,7 +32,9 @@ const NewEvent = () => {
   };
 
   const handleFileUpload = async () => {
-    if (file) {
+    const tokenExpired = await checkTokenExpiry()
+
+    if (!tokenExpired) {
       try {
         const formData = new FormData();
 
@@ -70,7 +73,8 @@ const NewEvent = () => {
         console.error("Error uploading file:", error);
       }
     } else {
-      console.log("No file selected");
+      alert("Session expired. Please log in again")
+      navigation.navigate("LogIn")      
     }
   };
 
@@ -80,6 +84,7 @@ const NewEvent = () => {
       <TextInput
         placeholder="Enter your Event Name"
         style={styles.inputFields}
+        value={eventName}
         onChangeText={handleEventInput}
       />
       <View style={styles.uploadContainer}>

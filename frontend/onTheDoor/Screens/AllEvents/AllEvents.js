@@ -12,7 +12,7 @@ import { useRoute } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./AllEventsStyles";
 import { IP } from "@env";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import checkTokenExpiry from "../../CheckTokenExpiry";
 
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
@@ -23,28 +23,35 @@ const AllEvents = () => {
   const { userId } = route.params;
 
   const getAllEvents = async () => {
-    try {
-      const response = await fetch(
-        `${IP}/events/get-all-events?userId=${userId}`,
-        { method: "GET" }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        console.log("All events retrieved successfully");
-        setEvents(data.events);
+      try {
+        const response = await fetch(
+          `${IP}/events/get-all-events?userId=${userId}`,
+          { method: "GET" }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log("All events retrieved successfully");
+          setEvents(data.events);
+        }
+      } catch (error) {
+        console.log("Error retrieving Events", error);
       }
-    } catch (error) {
-      console.log("Error retrieving Events", error);
-    }
   };
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      const token = AsyncStorage.getItem('token')
-      if (token) {
-        getAllEvents();
+    const fetchData = async () => {
+      const tokenExpired = await checkTokenExpiry();
+
+      if (!tokenExpired) {
+        await getAllEvents();
+      } else {
+        alert("Session expired. Please log in again")
+        navigation.navigate("LogIn")
       }
-    });
+    };
+    fetchData();
+
+    const unsubscribe = navigation.addListener("focus", fetchData);
 
     if (events && searchTerm) {
       const searchResults = events.filter((event) =>
